@@ -24,6 +24,7 @@ def checkered_throw_blanket():
     print('For example, type "10.3" and then hit enter.  Don\'t type "10.3 cm" because I haven\'t written the code to deal with unexpected input yet.')
     print("I'll do that later, but for now, this is a beta version, and I need you to be gentle with it.")
     print('Nothing bad will happen if you put in the wrong input right now, it just won\'t work.')
+    print("When the program asks if you're ready for the next row, simply press the enter key to advance.")
     print("Feedback, suggestions, and ideas for features to add are strongly encouraged!")
     print('Please contact me at the Twitter you got this link from.')
     print()
@@ -36,7 +37,6 @@ def checkered_throw_blanket():
     
     test_swatch_height = float(input("How tall/long is your test swatch, in centimeters?   "))
 
-    design_pattern = ("Knit five, purl five, until the end of the row", "Purl five, Knit five, until the end of the row")
     #test swatch should have same number of stitches as one repeat of design
     def calculate_width(swatch_width, blanket_width):
         stitches = 0
@@ -58,10 +58,32 @@ def checkered_throw_blanket():
         return rows
     row_total = calculate_height(test_swatch_height, blanket_size)
 
+    print()
     print("The number of stitches you should cast on is:", cast_on)
-    print("The number of rows you should knit is:", row_total)
+    print("The number of rows you\'ll need to knit is:", row_total)
+    print()
+    
+    current_row = 0
 
-    #figure out loop to iterate over design_pattern tuple and print instructions for each row, as well as track current row
-    #must take input from user after printing row instructions to print next row
-    #when loop ends, print cast-off instructions and quit program
+    design_pattern = ("Knit five, purl five, until the end of the row", "Purl five, Knit five, until the end of the row")
+    
+    while current_row < row_total:
+        knit_first = 0
+        purl_first = 0
+
+        while knit_first < 5:
+            print("Row: ", current_row + 1)
+            print(design_pattern[0])
+            knit_first += 1
+            current_row += 1
+            ready = input("Next row?  ")
+        while purl_first < 5:
+            print("Row: ", current_row + 1)
+            print(design_pattern[1])
+            purl_first += 1
+            current_row += 1
+            ready = input("Next row?  ")
+
+    print("That's all the rows you need to knit!")
+    print("Just cast off and you're done!")
 checkered_throw_blanket()
