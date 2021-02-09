@@ -1,5 +1,5 @@
 .header-img {
     width: 100%;
-    background: url(../TopBorderKnit.jpg);
+    background: "../images/TopBorderKnit.jpg";
     background-size: cover;
 }
