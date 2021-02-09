@@ -14,6 +14,8 @@ class User(db.Model):
     user_password = db.Column(db.String(30), nullable=False)
     user_name = db.Column(db.String(80), nullable=False)
 
+    user_project = db.relationship('ProjectRecord')
+
     def __repr__(self):
         """Show info about user."""
 
@@ -27,14 +29,17 @@ class ProjectRecord(db.Model):
 
     project_id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
     project_name = db.Column(db.String(100), nullable=False)
-    pattern_id = 
-    user_id =
+    pattern_id = db.Column(db.Integer, db.ForeignKey('patterns.pattern_id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
     swatch_width = db.Column(db.Integer, nullable=False)
     swatch_height = db.Column(db.Integer, nullable=False)
     project_width = db.Column(db.Integer, nullable=False)
     project_height = db.Column(db.Integer, nullable=False)
     current_row = db.Column(db.Integer, nullable=False)
     current_index = db.Column(db.Integer, nullable=False)
+
+    user = db.relationship('User')
+    pattern = db.relationship('PatternLibrary')
 
     def __repr__(self):
         return f"<Project id= {self.project_id} Project name= {self.project_name}>"
@@ -50,8 +55,10 @@ class PatternLibrary(db.Model):
     pattern_description = db.Column(db.String(), nullable=False)
     pattern_instructions = db.Column(db.String(), nullable=False)
 
+    project = db.relationship('ProjectRecord')
+
     def __repr__(self):
-        return f"<Pattern id= {self.pattern_id} Patter name= {self.pattern_name}>"
+        return f"<Pattern id= {self.pattern_id} Pattern name= {self.pattern_name}>"
 
 # change name of postgres file to something for my project, then uncomment function
 # def connect_to_db(app):
@@ -68,6 +75,3 @@ if __name__ == '__main__':
     connect_to_db(app)
     print('Connected to db!')
 
-
-#add foreign keys
-#add relationships
