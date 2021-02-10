@@ -62,7 +62,7 @@ class PatternLibrary(db.Model):
 
 def connect_to_db(app):
     """Connect the database to our Flask app."""
-
+#TODO why postgres, not postgresql???
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres:///knitting'
     app.config['SQLALCHEMY_ECHO'] = False
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -72,5 +72,6 @@ def connect_to_db(app):
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)
+    db.create_all()
     print('Connected to db!')
 
