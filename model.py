@@ -60,15 +60,14 @@ class PatternLibrary(db.Model):
     def __repr__(self):
         return f"<Pattern id= {self.pattern_id} Pattern name= {self.pattern_name}>"
 
-# change name of postgres file to something for my project, then uncomment function
-# def connect_to_db(app):
-#     """Connect the database to our Flask app."""
+def connect_to_db(app):
+    """Connect the database to our Flask app."""
 
-#     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres:///animals'
-#     app.config['SQLALCHEMY_ECHO'] = False
-#     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-#     db.app = app
-#     db.init_app(app)        
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres:///knitting'
+    app.config['SQLALCHEMY_ECHO'] = False
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db.app = app
+    db.init_app(app)        
 
 if __name__ == '__main__':
     from server import app
