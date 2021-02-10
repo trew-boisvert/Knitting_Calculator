@@ -3,3 +3,9 @@
     background: "../images/TopBorderKnit.jpg";
     background-size: cover;
 }
+
+.footer-img {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
