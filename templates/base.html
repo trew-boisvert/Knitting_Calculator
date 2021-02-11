@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Knitting Calculator{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet"
           href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.css"/>
     <link rel="stylesheet" href="../static/css/stylesheet.css"/>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"></script>
     {% block head %}{% endblock %}
 </head>
 <body>
@@ -30,5 +34,6 @@
 <div id="footer" class="footer-img">
   <img src="/static/images/BottomBorderKnit.jpg" width="100%" height = "150">
 </div>
+<script src="/static/js/ajax.js"></script>
 </body>
 </html>
