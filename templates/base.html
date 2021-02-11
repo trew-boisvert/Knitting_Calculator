@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Knitting Calculator</title>
+    <title>{% block title %}Knitting Calculator{% endblock %}</title>
     <link rel="stylesheet"
           href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.css"/>
     <link rel="stylesheet" href="../static/css/stylesheet.css"/>
+    {% block head %}{% endblock %}
 </head>
 <body>
   <main>
@@ -14,8 +15,21 @@
         <img src="/static/images/TopBorderKnit.jpg" width="100%" height="150">
       </div>
   </main>
-  <h1>Knitting Calculator</h1> 
-  <h2>Generates Knitting Patterns Based on Your Stitch Size</h2>
+  {% for msg in get_flashed_messages() %}
+    <p class="flash-msg">
+      {{ msg }}
+    </p>
+
+  {% endfor %}
+
+  {% block bodytitle %}
+    <h1>Knitting Calculator</h1> 
+    <h2>Generates Knitting Patterns Based on Your Stitch Size</h2>
+  {% endblock %}
+
+  {% block body %}{% endblock %}
+
+  {% block after_body %}{% endblock %}
 <div id="footer" class="footer-img">
   <img src="/static/images/BottomBorderKnit.jpg" width="100%" height = "150">
 </div>
