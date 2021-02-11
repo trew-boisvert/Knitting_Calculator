@@ -10,13 +10,15 @@ def create_user(user_name, user_email, user_password):
 
     return user
 
-def create_project(project_name, swatch_width, 
+def create_project(user_id, pattern_id, project_name, swatch_width, 
                     swatch_height, project_width, 
                     project_height, current_row,  
                     current_index):
     """Create and return a new project."""
 
     project = ProjectRecord(
+                user_id=user_id, 
+                pattern_id=pattern_id, 
                 project_name=project_name,
                 swatch_width=swatch_width,
                 swatch_height=swatch_height,

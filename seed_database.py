@@ -84,3 +84,33 @@ stitch_library = [{
 }
 ]
 
+
+stitches_in_db = []
+for stitch in stitch_library:
+    pattern_name = stitch['pattern_name']
+    pattern_description = stitch['pattern_description']
+    pattern_instructions = stitch['pattern_instructions']
+    pattern_repeat_width = stitch['pattern_repeat_width']
+    pattern_repeat_height = stitch['pattern_repeat_height']
+
+    new_stitch = crud.create_pattern(pattern_name, pattern_description, pattern_instructions, pattern_repeat_width, pattern_repeat_height)
+    stitches_in_db.append(new_stitch)
+
+for n in range(10):
+    email = f'user{n}@test.com'
+    password = 'password'
+    name = f'user{n} name'
+
+    user = crud.create_user(name, email, password)
+
+    us_id = n
+    pa_id = randint(1,5)
+    rand_proj = f'project{n}'
+    sw_wi = randint(1, 10)
+    sw_he = randint(1, 10)
+    pr_wi = randint(50, 100)
+    pr_he = randint(50, 100)
+    cu_ro = randint(10, 30)
+    cu_in = randint(1, 3)
+
+    crud.create_project(us_id, pa_id, rand_proj, sw_wi, sw_he, pr_wi, pr_he, cu_ro, cu_in)
