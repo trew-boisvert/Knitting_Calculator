@@ -103,7 +103,7 @@ for n in range(10):
 
     user = crud.create_user(name, email, password)
 
-    us_id = n
+    us_id = n + 1
     pa_id = randint(1,5)
     rand_proj = f'project{n}'
     sw_wi = randint(1, 10)

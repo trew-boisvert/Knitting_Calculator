@@ -32,7 +32,9 @@ def create_project(user_id, pattern_id, project_name, swatch_width,
 
     return project
 
-def create_pattern(pattern_name, pattern_description, pattern_instructions, pattern_repeat_width, pattern_repeat_height):
+def create_pattern(pattern_name, pattern_description, 
+                    pattern_instructions, pattern_repeat_width, 
+                    pattern_repeat_height):
     """Create and return a new stitch pattern."""
 
     pattern = PatternLibrary(
