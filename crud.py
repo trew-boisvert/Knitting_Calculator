@@ -30,13 +30,15 @@ def create_project(project_name, swatch_width,
 
     return project
 
-def create_pattern(pattern_name, pattern_description, pattern_instructions):
+def create_pattern(pattern_name, pattern_description, pattern_instructions, pattern_repeat_width, pattern_repeat_height):
     """Create and return a new stitch pattern."""
 
     pattern = PatternLibrary(
                 pattern_name=pattern_name,
                 pattern_description=pattern_description,
-                pattern_instructions=pattern_instructions)
+                pattern_instructions=pattern_instructions,
+                pattern_repeat_width=pattern_repeat_width,
+                pattern_repeat_height=pattern_repeat_height)
 
     db.session.add(pattern)
     db.session.commit()

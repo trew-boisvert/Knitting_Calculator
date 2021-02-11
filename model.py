@@ -54,6 +54,8 @@ class PatternLibrary(db.Model):
     pattern_name = db.Column(db.String(100), nullable=False)
     pattern_description = db.Column(db.String(), nullable=False)
     pattern_instructions = db.Column(db.String(), nullable=False)
+    pattern_repeat_width = db.Column(db.Integer, nullable=False)
+    pattern_repeat_height = db.Column(db.Integer, nullable=False)
 
     project = db.relationship('ProjectRecord')
 
