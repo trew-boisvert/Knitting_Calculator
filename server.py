@@ -1,10 +1,13 @@
 
-from flask import Flask, jsonify, render_template
-#from model import connect_to_db, User, ProjectRecord, PatternLibrary
-
+from flask import Flask, jsonify, render_template, request, flash, session, redirect
+from model import connect_to_db, User, ProjectRecord, PatternLibrary
+import crud
+from jinja2 import StrictUndefined
 
 
 app = Flask(__name__)
+app.secret_key = "dev"
+app.jinja_env.undefined = StrictUndefined
 
 @app.route('/')
 def homepage():
