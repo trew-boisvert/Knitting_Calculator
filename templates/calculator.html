@@ -11,11 +11,18 @@
 
 {% block body %}
   <dd id="calcbody">This calculator will adjust the number of rows and stitches in a pattern.</dd>
-
+  <a href="http://0.0.0.0:5000/">Go back to Welcome page.</a>
   <form id="start-project">
-    
+    <label for="pattern_id">Select a Stitch Pattern:</label>
+    <select id="pattern-id" name="pattern_id">
+      <option value="">Choose a Stitch Pattern</option>
+      {% for n in range(1, 6) %}
+        <option value="{{ n }}">{{ n }}</option>
+      {% endfor %}
+    </select>
+
     <label for="swatch-width">How wide is your swatch, in centimeters?</label>
-    <input type="number" id="swatch-width" name="swatch-width" min="0" max="50">
+    <input type="number" step=0.01 id="swatch-width" name="swatch-width" min="0" max="50">
 
     <label for="swatch-height">How tall is your swatch, in centimeters?</label>
     <input type="number" id="swatch-height" name="swatch-height" min="0" max="50">
@@ -26,6 +33,7 @@
     <label for="project-height">How tall do you want your project to be, in centimeters?</label>
     <input type="number" id="project-height" name="project-height" min="0" max="500">
 
+    <input type="submit">
   </form>
 {% endblock %}
 

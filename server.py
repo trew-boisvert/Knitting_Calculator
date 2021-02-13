@@ -4,7 +4,6 @@ from model import connect_to_db, User, ProjectRecord, PatternLibrary
 import crud
 from jinja2 import StrictUndefined
 
-
 app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
@@ -26,6 +25,14 @@ def calculator_page():
     """View calculator page."""
 
     return render_template('calculator.html')
+
+#TODO finish this route
+# @app.route('/api/instructions/<int:pattern_id>')
+# def instructions(pattern_id):
+#     """Access pattern instructions from database."""
+
+#     instructions = PatternLibrary.query.get(pattern_id)
+
 
 @app.route('/profile')
 def profile_page():
