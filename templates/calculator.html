@@ -5,12 +5,30 @@
 {% block head %}{% endblock %}
 
 {% block bodytitle %}
-    <h1>Knitting Calculator</h1> 
-    <dd id="calctitle"></dd><h2>Generates Knitting Patterns Based on Your Stitch Size</h2></dd>
+  <h1>Knitting Calculator</h1> 
+  <dd id="calctitle"></dd><h2>Generates Knitting Patterns Based on Your Stitch Size</h2></dd>
 {% endblock %}
 
 {% block body %}
-<dd id="calcbody">This calculator will adjust the number of rows and stitches in a pattern.</dd>
+  <dd id="calcbody">This calculator will adjust the number of rows and stitches in a pattern.</dd>
+
+  <form id="start-project">
+    
+    <label for="swatch-width">How wide is your swatch, in centimeters?</label>
+    <input type="number" id="swatch-width" name="swatch-width" min="0" max="50">
+
+    <label for="swatch-height">How tall is your swatch, in centimeters?</label>
+    <input type="number" id="swatch-height" name="swatch-height" min="0" max="50">
+
+    <label for="project-width">How wide do you want your project to be, in centimeters?</label>
+    <input type="number" id="project-width" name="project-width" min="0" max="500">
+
+    <label for="project-height">How tall do you want your project to be, in centimeters?</label>
+    <input type="number" id="project-height" name="project-height" min="0" max="500">
+
+  </form>
 {% endblock %}
 
 {% block after_body %}{% endblock %}
+
+<!-- TODO Fill out form: Stitch choice, project width, project height, swatch width, swatch height-->
