@@ -13,12 +13,13 @@
   <dd id="calcbody">This calculator will adjust the number of rows and stitches in a pattern.</dd>
   <a href="http://0.0.0.0:5000/">Go back to Welcome page.</a>
   <form id="start-project">
-    <label for="pattern_id">Select a Stitch Pattern:</label>
+    <label for="pattern-id">Select a Stitch Pattern:</label>
     <select id="pattern-id" name="pattern_id">
-      <option value="">Choose a Stitch Pattern</option>
-      {% for n in range(1, 6) %}
-        <option value="{{ n }}">{{ n }}</option>
-      {% endfor %}
+      <option value="1">Basket Weave 8x8</option>
+      <option value="2">Bird's Eye 4x4</option>
+      <option value="3">Checkerboard 10x10</option>
+      <option value="4">Cat's Eye 4x3</option>
+      <option value="5">Dimple Eyelet 4x8</option>
     </select>
 
     <label for="swatch-width">How wide is your swatch, in centimeters?</label>
@@ -35,6 +36,25 @@
 
     <input type="submit">
   </form>
+
+  <section id="display-pattern">
+    <dl>
+      <dt>Stitch Name</dt>
+      <dd id="stitchname"></dd>
+
+      <dt>Description</dt>
+      <dd id="description"></dd>
+
+      <dt>Stitches to Cast On</dt>
+      <dd id="caston"></dd>
+
+      <dt>Rows to Knit</dt>
+      <dd id="totalrows"></dd>
+
+      <dt>Knitting Pattern</dt>
+      <dd id="knitpat"></dd>
+    </dl>
+  </section>
 {% endblock %}
 
 {% block after_body %}{% endblock %}
