@@ -31,7 +31,7 @@ function MakePatternFromInput(evt){
         $('#stitchname').html(res['pattern_name']);
         $('#description').html(res['pattern_description']);
         $('#caston').html(res['cast_on']);
-        $('#totalrows').html(res['pattern_name']);
+        $('#totalrows').html(res['row_total']);
         $('#knitpat').html(res['pattern_instructions']);
     })
 }

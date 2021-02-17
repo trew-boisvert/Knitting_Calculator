@@ -10,13 +10,26 @@ app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 
+# Functions for backend calculations
+
 def calculate_width(swatch_width, project_width, repeat_size):
+    """Calculate number of stitches for knitting project width."""
     stitches = 0
     width = 0
     while width < project_width:
         stitches += repeat_size
         width += swatch_width
     return stitches
+
+def calculate_height(swatch_height, project_height, repeat_size):
+    rows = 0
+    height = 0
+    while height < project_height:
+        rows += repeat_size
+        height += swatch_height
+    return rows
+
+#Routes
 
 @app.route('/')
 def welcome_page():
@@ -37,25 +50,20 @@ def calculator_page():
     return render_template('calculator.html')
 
 
-# //     let patID = $("#pattern-id").val();
-# //     let sWidth = $("#swatch-width").val();
-# //     let sHeight = $("#swatch-height").val();
-# //     let pWidth = $("#project-width").val();
-# //     let pHeight = $("#project-height").val();
 #TODO finish this route
 @app.route('/api/instructions', methods=['POST'])
 def instructions():
     """Access pattern instructions from database, perform and return calculations."""
 
-    pat_ID = request.form.get('patID')
-    pat_ID = int(pat_ID)
-    
+    pat_ID = int(request.form.get('patID'))
     sWidth = int(request.form.get('sWidth'))
     sHeight = int(request.form.get('sHeight'))
     pWidth = int(request.form.get('pWidth'))
     pHeight = int(request.form.get('pHeight'))
     instructions = PatternLibrary.query.get(pat_ID)
+    print(instructions.pattern_instructions)
     cast_on = calculate_width(sWidth, pWidth, instructions.pattern_repeat_width)
+    row_total = calculate_height(sHeight, pHeight, instructions.pattern_repeat_height)
     if instructions:
         return jsonify({'status': 'success',
                         'pattern_id': instructions.pattern_id,
@@ -64,7 +72,8 @@ def instructions():
                         'pattern_description': instructions.pattern_description, 
                         'pattern_repeat_width': instructions.pattern_repeat_width,
                         'pattern_repeat_height': instructions.pattern_repeat_height, 
-                        'cast_on': cast_on})
+                        'cast_on': cast_on,
+                        'row_total': row_total})
     else:
         return jsonify({'status': 'error',
                         'message': 'Invalid input, please try again.'})
