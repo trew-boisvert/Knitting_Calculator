@@ -1,4 +1,4 @@
-from model import db, User, ProjectRecord, PatternLibrary, connect_to_db
+from model import db, User, ProjectRecord, Pattern, Instruction, connect_to_db
 
 def create_user(user_name, user_email, user_password):
     """Create and return a new user."""
@@ -33,14 +33,13 @@ def create_project(user_id, pattern_id, project_name, swatch_width,
     return project
 
 def create_pattern(pattern_name, pattern_description, 
-                    pattern_instructions, pattern_repeat_width, 
+                    pattern_repeat_width, 
                     pattern_repeat_height):
     """Create and return a new stitch pattern."""
 
-    pattern = PatternLibrary(
+    pattern = Pattern(
                 pattern_name=pattern_name,
                 pattern_description=pattern_description,
-                pattern_instructions=pattern_instructions,
                 pattern_repeat_width=pattern_repeat_width,
                 pattern_repeat_height=pattern_repeat_height)
 
@@ -49,10 +48,25 @@ def create_pattern(pattern_name, pattern_description,
 
     return pattern
 
+def create_instruction(pattern_id, instruction_row, instruction_text):
+    """Create and return a new stitch instruction row.
+        Each pattern will need multiple rows."""
+
+    instruction = Instruction(
+                    pattern_id=pattern_id,
+                    instruction_row=instruction_row,
+                    instruction_text=instruction_text)
+
+    db.session.add(instruction)
+    db.session.commit()
+
+    return instruction
+
+
 def get_patterns():
     """Return all patterns."""
 
-    return PatternLibrary.query.all()
+    return Pattern.query.all()
 
 def get_projects():
     """Return all projects."""
@@ -63,6 +77,8 @@ def get_users():
     """Return all users."""
 
     return User.query.all()
+
+
 
 if __name__ == '__main__':
     from server import app

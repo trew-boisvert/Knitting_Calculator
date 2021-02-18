@@ -93,8 +93,15 @@ for stitch in stitch_library:
     pattern_repeat_width = stitch['pattern_repeat_width']
     pattern_repeat_height = stitch['pattern_repeat_height']
 
-    new_stitch = crud.create_pattern(pattern_name, pattern_description, pattern_instructions, pattern_repeat_width, pattern_repeat_height)
+    new_stitch = crud.create_pattern(pattern_name, pattern_description, pattern_repeat_width, pattern_repeat_height)
     stitches_in_db.append(new_stitch)
+
+    for line in range(len(stitch['pattern_instructions'])):
+        pattern_id = new_stitch.pattern_id
+        instruction_row = line + 1
+        instruction_text = stitch['pattern_instructions'][line]
+
+        crud.create_instruction(pattern_id, instruction_row, instruction_text)
 
 for n in range(10):
     email = f'user{n}@test.com'

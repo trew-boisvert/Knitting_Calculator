@@ -1,6 +1,6 @@
 
 from flask import Flask, jsonify, render_template, request, flash, session, redirect
-from model import connect_to_db, User, ProjectRecord, PatternLibrary
+from model import connect_to_db, User, ProjectRecord, Pattern, Instruction
 import crud
 from jinja2 import StrictUndefined
 
@@ -60,15 +60,15 @@ def instructions():
     sHeight = int(request.form.get('sHeight'))
     pWidth = int(request.form.get('pWidth'))
     pHeight = int(request.form.get('pHeight'))
-    instructions = PatternLibrary.query.get(pat_ID)
-    print(instructions.pattern_instructions)
+    #maybe don't call it 'instructions' now that that's a tablename in the database
+    instructions = Pattern.query.get(pat_ID)
+    # print(instructions.pattern_instructions[0])
     cast_on = calculate_width(sWidth, pWidth, instructions.pattern_repeat_width)
     row_total = calculate_height(sHeight, pHeight, instructions.pattern_repeat_height)
     if instructions:
         return jsonify({'status': 'success',
                         'pattern_id': instructions.pattern_id,
                         'pattern_name': instructions.pattern_name, 
-                        'pattern_instructions': instructions.pattern_instructions,
                         'pattern_description': instructions.pattern_description, 
                         'pattern_repeat_width': instructions.pattern_repeat_width,
                         'pattern_repeat_height': instructions.pattern_repeat_height, 

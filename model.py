@@ -39,13 +39,13 @@ class ProjectRecord(db.Model):
     current_index = db.Column(db.Integer, nullable=False)
 
     user = db.relationship('User')
-    pattern = db.relationship('PatternLibrary')
+    pattern = db.relationship('Pattern')
 
     def __repr__(self):
         return f"<Project id= {self.project_id} Project name= {self.project_name}>"
 
 
-class PatternLibrary(db.Model):
+class Pattern(db.Model):
     """Data model for stitch patterns."""
 
     __tablename__ = "patterns"
@@ -53,14 +53,30 @@ class PatternLibrary(db.Model):
     pattern_id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
     pattern_name = db.Column(db.String(100), nullable=False)
     pattern_description = db.Column(db.String(), nullable=False)
-    pattern_instructions = db.Column(db.String(), nullable=False)
     pattern_repeat_width = db.Column(db.Integer, nullable=False)
     pattern_repeat_height = db.Column(db.Integer, nullable=False)
 
     project = db.relationship('ProjectRecord')
+    instruction = db.relationship('Instruction')
 
     def __repr__(self):
         return f"<Pattern id= {self.pattern_id} Pattern name= {self.pattern_name}>"
+
+class Instruction(db.Model):
+    """Data model for stitch pattern instructions."""
+
+    __tablename__ = "instructions"
+
+    instruction_id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
+    pattern_id = db.Column(db.Integer, db.ForeignKey('patterns.pattern_id'), nullable=False)
+    instruction_row = db.Column(db.Integer, nullable=False)
+    instruction_text = db.Column(db.String(), nullable=False)
+
+    pattern = db.relationship('Pattern')
+
+    def __repr(self):
+        return f"<Pattern id= {self.pattern_id} Instructions>"
+
 
 def connect_to_db(app):
     """Connect the database to our Flask app."""
