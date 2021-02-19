@@ -29,6 +29,12 @@ def calculate_height(swatch_height, project_height, repeat_size):
         height += swatch_height
     return rows
 
+def get_instruction_array(list_of_objects):
+    result = []
+    for line in list_of_objects:
+        result.append(line.instruction_text)
+    return result
+
 #Routes
 
 @app.route('/')
@@ -60,20 +66,26 @@ def instructions():
     sHeight = int(request.form.get('sHeight'))
     pWidth = int(request.form.get('pWidth'))
     pHeight = int(request.form.get('pHeight'))
-    #maybe don't call it 'instructions' now that that's a tablename in the database
-    instructions = Pattern.query.get(pat_ID)
-    # print(instructions.pattern_instructions[0])
-    cast_on = calculate_width(sWidth, pWidth, instructions.pattern_repeat_width)
-    row_total = calculate_height(sHeight, pHeight, instructions.pattern_repeat_height)
-    if instructions:
+
+    stitchChoice = Pattern.query.get(pat_ID)
+    all_instructions_table = Instruction.query.filter(Instruction.pattern_id == pat_ID).order_by(Instruction.instruction_row).all()
+    stitchInstructions = get_instruction_array(all_instructions_table)
+    print(stitchInstructions)
+    #select instruction_text from instructions where pattern_id=2 order by instruction_row;
+    cast_on = calculate_width(sWidth, pWidth, stitchChoice.pattern_repeat_width)
+    row_total = calculate_height(sHeight, pHeight, stitchChoice.pattern_repeat_height)
+
+    if stitchChoice:
         return jsonify({'status': 'success',
-                        'pattern_id': instructions.pattern_id,
-                        'pattern_name': instructions.pattern_name, 
-                        'pattern_description': instructions.pattern_description, 
-                        'pattern_repeat_width': instructions.pattern_repeat_width,
-                        'pattern_repeat_height': instructions.pattern_repeat_height, 
+                        'pattern_id': stitchChoice.pattern_id,
+                        'pattern_name': stitchChoice.pattern_name, 
+                        'pattern_description': stitchChoice.pattern_description, 
+                        'pattern_repeat_width': stitchChoice.pattern_repeat_width,
+                        'pattern_repeat_height': stitchChoice.pattern_repeat_height, 
                         'cast_on': cast_on,
-                        'row_total': row_total})
+                        'row_total': row_total,
+                        'stitch': stitchInstructions,
+                        'start': f'To start, cast on {cast_on} stitches.'})
     else:
         return jsonify({'status': 'error',
                         'message': 'Invalid input, please try again.'})
