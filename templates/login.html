@@ -10,7 +10,34 @@
 {% endblock %}
 
 {% block body %}
-  <p>This page lets you create or access a user account.</p>
+  <p>This page lets you login to or create a user account.</p>
+  <a href="http://0.0.0.0:5000/">Go back to Welcome page.</a>
+  <form action="/new-account" method="POST">
+    <h2>Create a new account:</h2>
+    
+    <label>Username:</label>
+    <input type="text" name="newusername">
+
+    <label>Password:</label>
+    <input type="text" name="newpassword">
+
+    <label>Email:</label>
+    <input type="text" name="newemail">
+
+    <input type="submit">
+  </form>
+  <form action="/handle-login" method="POST">
+    <h2>Or login to your existing account here:</h2>
+
+    <label>Username:</label>
+    <input type="text" name="username">
+
+    <label>Password:</label>
+    <input type="text" name="password">
+
+    <input type="submit">
+  </form>
+  
 {% endblock %}
 
 {% block after_body %}{% endblock %}

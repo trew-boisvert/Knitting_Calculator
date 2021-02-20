@@ -54,7 +54,6 @@ def calculator_page():
     return render_template('calculator.html')
 
 
-#TODO finish this route
 @app.route('/api/instructions', methods=['POST'])
 def instructions():
     """Access pattern instructions from database, perform and return calculations."""
@@ -89,9 +88,7 @@ def instructions():
                         'cast_on': cast_on,
                         'row_total': row_total,
                         'stitch': stitchInstructions,
-                        'start': f'To start, cast on {cast_on} stitches.',
-                        'currentRow': 0,
-                        'indexer': 0})
+                        'start': f'To start, cast on {cast_on} stitches.'})
 
     else:
         return jsonify({'status': 'error',
