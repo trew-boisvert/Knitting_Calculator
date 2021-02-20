@@ -1,9 +1,7 @@
-
 from flask import Flask, jsonify, render_template, request, flash, session, redirect
 from model import connect_to_db, User, ProjectRecord, Pattern, Instruction
 import crud
 from jinja2 import StrictUndefined
-
 
 
 app = Flask(__name__)
@@ -70,11 +68,17 @@ def instructions():
     stitchChoice = Pattern.query.get(pat_ID)
     all_instructions_table = Instruction.query.filter(Instruction.pattern_id == pat_ID).order_by(Instruction.instruction_row).all()
     stitchInstructions = get_instruction_array(all_instructions_table)
-    print(stitchInstructions)
-    #select instruction_text from instructions where pattern_id=2 order by instruction_row;
+    
     cast_on = calculate_width(sWidth, pWidth, stitchChoice.pattern_repeat_width)
     row_total = calculate_height(sHeight, pHeight, stitchChoice.pattern_repeat_height)
 
+    # session['pattern_id'] = pat_ID
+    # session['cast_on'] = cast_on
+    # session['row_total'] = row_total
+    # session['stitchInstructions'] = stitchInstructions
+    # session['currentRow'] = 0
+    # session['indexer'] = 0
+    # session.modified = True
     if stitchChoice:
         return jsonify({'status': 'success',
                         'pattern_id': stitchChoice.pattern_id,
@@ -85,7 +89,10 @@ def instructions():
                         'cast_on': cast_on,
                         'row_total': row_total,
                         'stitch': stitchInstructions,
-                        'start': f'To start, cast on {cast_on} stitches.'})
+                        'start': f'To start, cast on {cast_on} stitches.',
+                        'currentRow': 0,
+                        'indexer': 0})
+
     else:
         return jsonify({'status': 'error',
                         'message': 'Invalid input, please try again.'})
