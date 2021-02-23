@@ -16,26 +16,27 @@
     <h2>Create a new account:</h2>
     
     <label>Username:</label>
-    <input type="text" name="newusername">
+    <input type="text" name="newusername" placeholder="Name">
 
     <label>Password:</label>
-    <input type="text" name="newpassword">
+    <input type="password" name="newpassword" placeholder="Password">
 
     <label>Email:</label>
-    <input type="text" name="newemail">
+    <input type="email" name="newemail" placeholder="Email">
 
-    <input type="submit">
+    <button class="button is-block is-info is-large is-fullwidth">Sign Up</button>
   </form>
+
   <form action="/handle-login" method="POST">
     <h2>Or login to your existing account here:</h2>
 
     <label>Email:</label>
-    <input type="text" name="email">
+    <input type="email" name="email" placeholder="Email">
 
     <label>Password:</label>
-    <input type="text" name="password">
+    <input type="password" name="password" placeholder="Password">
 
-    <input type="submit">
+    <button class="button is-block is-info is-large is-fullwidth">Log In</button>
   </form>
   
 {% endblock %}
