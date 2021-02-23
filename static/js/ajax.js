@@ -11,7 +11,7 @@
     }
     console.log('formData:', formData);
     let url = `/api/instructions`;
-//maybe change append to prepend
+
     $('#start-knitting').append('<button id="advance-row">Next Row</button>');
     
     $.post(url, formData, (res) => {
@@ -36,6 +36,7 @@
 
         console.log('current row', sessionStorage.currentRow);
         console.log('row total', sessionStorage.row_total);
+        //maybe change append to prepend?
         if(parseInt(sessionStorage.currentRow) === parseInt(sessionStorage.row_total)){
             $('#start-knitting').append(`<ul>That's all!  Cast off and you're done!</ul>`);
         }
