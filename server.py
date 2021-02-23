@@ -1,7 +1,8 @@
-from flask import Flask, jsonify, render_template, request, flash, session, redirect
+from flask import Flask, jsonify, render_template, request, flash, session, redirect, url_for
 from model import connect_to_db, User, ProjectRecord, Pattern, Instruction
 import crud
 from jinja2 import StrictUndefined
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 app = Flask(__name__)
@@ -47,11 +48,19 @@ def login_page():
 
     return render_template('login.html')
 
-# @app.route('/handle-login', methods=['POST'])
-# def handle_login():
-#     """Log the user into the application."""
-#     username = request.form['username']
-#     password = request.form['password']
+@app.route('/handle-login', methods=['POST'])
+def handle_login():
+    """Log the user into the application."""
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    user = User.query.filter_by(user_email=email).first()
+
+    if not user or not check_password_hash(user.user_password, password):
+        flash('Incorrect email/password.  Please try again')
+        return redirect('/login')
+    flash(f'Logged in as {user.user_name}')    
+    return redirect('/profile')
 
 #check if username is in database and password at username in database matches.  
     #if yes, flash(f'Logged in as {username}') and return redirect('/profile')  

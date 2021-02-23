@@ -1,9 +1,10 @@
 from model import db, User, ProjectRecord, Pattern, Instruction, connect_to_db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 def create_user(user_name, user_email, user_password):
     """Create and return a new user."""
 
-    user = User(user_email=user_email, user_password=user_password, user_name=user_name)
+    user = User(user_email=user_email, user_password=generate_password_hash(user_password, method='sha256'), user_name=user_name)
 
     db.session.add(user)
     db.session.commit()
