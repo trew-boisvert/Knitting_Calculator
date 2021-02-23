@@ -47,6 +47,33 @@ def login_page():
 
     return render_template('login.html')
 
+# @app.route('/handle-login', methods=['POST'])
+# def handle_login():
+#     """Log the user into the application."""
+#     username = request.form['username']
+#     password = request.form['password']
+
+#check if username is in database and password at username in database matches.  
+    #if yes, flash(f'Logged in as {username}') and return redirect('/profile')  
+    #if no, flash('Username or password is incorrect.') and return redirect('/login')
+
+@app.route('/new-account', methods=['POST'])
+def create_new_user():
+    """Create/register a new user."""
+
+    email = request.form.get('newemail')
+    password = request.form.get('newpassword')
+    username = request.form.get('newusername')
+
+    user = crud.find_user_by_email(email)
+    if user:
+        flash('There is already an account with that email address.')
+    else:
+        crud.create_user(username, email, password)
+        flash('Your account has been created!  Please log in.')
+
+    return redirect('/login')
+
 @app.route('/calculator')
 def calculator_page():
     """View calculator page."""
@@ -71,13 +98,14 @@ def instructions():
     cast_on = calculate_width(sWidth, pWidth, stitchChoice.pattern_repeat_width)
     row_total = calculate_height(sHeight, pHeight, stitchChoice.pattern_repeat_height)
 
-    # session['pattern_id'] = pat_ID
-    # session['cast_on'] = cast_on
-    # session['row_total'] = row_total
-    # session['stitchInstructions'] = stitchInstructions
-    # session['currentRow'] = 0
-    # session['indexer'] = 0
-    # session.modified = True
+    session['pattern_id'] = pat_ID
+    session['cast_on'] = cast_on
+    session['row_total'] = row_total
+    session['stitchInstructions'] = stitchInstructions
+    session['currentRow'] = 0
+    session['indexer'] = 0
+    session.modified = True
+
     if stitchChoice:
         return jsonify({'status': 'success',
                         'pattern_id': stitchChoice.pattern_id,
@@ -111,3 +139,9 @@ def photos_page():
 if __name__ == '__main__':
     connect_to_db(app)
     app.run(host='0.0.0.0', debug=True)
+
+
+
+#code I might need later and don't want to retype:
+
+

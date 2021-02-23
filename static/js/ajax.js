@@ -1,7 +1,7 @@
 
-$("#start-project").on('submit', (evt) => {
+ function makePatternFromInput(evt){
     evt.preventDefault();
-
+    console.log('formData:', formData);
     const formData = {
         patID: $("#pattern-id").val(),
         sWidth: $("#swatch-width").val(),
@@ -9,15 +9,16 @@ $("#start-project").on('submit', (evt) => {
         pWidth: $("#project-width").val(),
         pHeight: $("#project-height").val()
     }
-    let url = `/api/instructions`
+    let url = `/api/instructions`;
 //maybe change append to prepend
     $('#start-knitting').append('<button id="advance-row">Next Row</button>');
-    let stitch = sessionStorage.stitchInstructions.split(".,")
+    console.log(sessionStorage.stitchInstructions);
+    let stitch = sessionStorage.stitchInstructions.split(".,");
     $("#advance-row").on('click', (evt) => {
         console.log('current row', sessionStorage.currentRow);
         console.log('row total', sessionStorage.row_total);
         if(parseInt(sessionStorage.currentRow) === parseInt(sessionStorage.row_total)){
-            $('#start-knitting').append(`<ul>That's all!  Cast off and you're done!</ul>`)
+            $('#start-knitting').append(`<ul>That's all!  Cast off and you're done!</ul>`);
         }
         else{
             if(parseInt(sessionStorage.indexer) === stitch.length){
@@ -30,7 +31,7 @@ $("#start-project").on('submit', (evt) => {
     })
 
     $.post(url, formData, (res) => {
-        console.log(res)
+        console.log(res);
         $('#stitchname').html(res['pattern_name']);
         $('#description').html(res['pattern_description']);
         $('#caston').html(res['cast_on']);
@@ -42,5 +43,7 @@ $("#start-project").on('submit', (evt) => {
         sessionStorage.setItem('currentRow', 0)
         sessionStorage.setItem('indexer', 0)
     })
-});
+}
+
+$("#start-project").on('submit', makePatternFromInput)
   

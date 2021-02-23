@@ -78,7 +78,10 @@ def get_users():
 
     return User.query.all()
 
+def find_user_by_email(email):
+    """Find a user by their email address."""
 
+    return User.query.filter(User.user_email == email).first()
 
 if __name__ == '__main__':
     from server import app
