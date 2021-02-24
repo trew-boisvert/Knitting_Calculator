@@ -2,10 +2,11 @@
     width: 100%;
     background: "../images/TopBorderKnit.jpg";
     background-size: cover;
+    position: sticky;
 }
 
 .footer-img {
-    position: absolute;
+    position: sticky;
     bottom: 0;
     left: 0;
 }

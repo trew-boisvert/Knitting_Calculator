@@ -41,6 +41,7 @@
             $('#start-knitting').append(`<ul>That's all!  Cast off and you're done!</ul>`);
         }
         else{
+//bind numbers to variable and use that instead of parseing all the time
             if(parseInt(sessionStorage.indexer) === stitch.length){
                 sessionStorage.setItem('indexer', 0);
             }

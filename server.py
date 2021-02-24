@@ -3,7 +3,7 @@ from model import connect_to_db, User, ProjectRecord, Pattern, Instruction
 import crud
 from jinja2 import StrictUndefined
 from werkzeug.security import generate_password_hash, check_password_hash
-
+# can do crud.check_password_hash as a refactor, and remove above line
 
 app = Flask(__name__)
 app.secret_key = "dev"
@@ -59,12 +59,12 @@ def handle_login():
     if not user or not check_password_hash(user.user_password, password):
         flash('Incorrect email/password.  Please try again')
         return redirect('/login')
+    session['logged_in'] = True
+    session['user_id'] = user.user_id
+    session.modified = True
+    print(session)
     flash(f'Logged in as {user.user_name}')    
     return redirect('/profile')
-
-#check if username is in database and password at username in database matches.  
-    #if yes, flash(f'Logged in as {username}') and return redirect('/profile')  
-    #if no, flash('Username or password is incorrect.') and return redirect('/login')
 
 @app.route('/new-account', methods=['POST'])
 def create_new_user():
@@ -108,11 +108,13 @@ def instructions():
     row_total = calculate_height(sHeight, pHeight, stitchChoice.pattern_repeat_height)
 
     session['pattern_id'] = pat_ID
+    session['swatch_width'] = sWidth
+    session['swatch_height'] = sHeight
+    session['project_width'] = pWidth
+    session['project_height'] = pHeight
     session['cast_on'] = cast_on
     session['row_total'] = row_total
     session['stitchInstructions'] = stitchInstructions
-    session['currentRow'] = 0
-    session['indexer'] = 0
     session.modified = True
 
     if stitchChoice:
@@ -131,12 +133,24 @@ def instructions():
         return jsonify({'status': 'error',
                         'message': 'Invalid input, please try again.'})
 
+@app.route('/save_pattern', methods=['POST'])
+def save_pattern():
+    """Save an in-progress pattern to user profile."""
+    #receive info object from ajax
+    #use that data plus data from server session in crud function
+    #crud function saves new project record
+    #redirect to profile page
+#finish this route
+
 
 @app.route('/profile')
 def profile_page():
     """View profile page."""
 
-    return render_template('profile.html')
+    if session['logged_in'] == True:
+        return render_template('profile.html')
+    else:
+        return redirect('/login')
 
 @app.route('/photos')
 def photos_page():
@@ -149,8 +163,5 @@ if __name__ == '__main__':
     connect_to_db(app)
     app.run(host='0.0.0.0', debug=True)
 
-
-
-#code I might need later and don't want to retype:
 
 
