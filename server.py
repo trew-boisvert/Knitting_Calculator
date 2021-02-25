@@ -99,6 +99,7 @@ def instructions():
     sHeight = int(request.form.get('sHeight'))
     pWidth = int(request.form.get('pWidth'))
     pHeight = int(request.form.get('pHeight'))
+    pName = request.form.get('pName')
 
     stitchChoice = Pattern.query.get(pat_ID)
     all_instructions_table = Instruction.query.filter(Instruction.pattern_id == pat_ID).order_by(Instruction.instruction_row).all()
@@ -115,6 +116,7 @@ def instructions():
     session['cast_on'] = cast_on
     session['row_total'] = row_total
     session['stitchInstructions'] = stitchInstructions
+    session['project_name'] = pName
     session.modified = True
 
     if stitchChoice:
@@ -136,12 +138,19 @@ def instructions():
 @app.route('/save_pattern', methods=['POST'])
 def save_pattern():
     """Save an in-progress pattern to user profile."""
-    #receive info object from ajax
-    #use that data plus data from server session in crud function
-    #crud function saves new project record
-    #redirect to profile page
-#finish this route
+    currentRow = int(request.form.get('currentRow'))
+    currentIndex = int(request.form.get('currentIndex'))
 
+    session['currentRow'] = currentRow
+    session['currentIndex'] = currentIndex
+    session.modified = True
+
+    crud.create_project(session['user_id'], session['pattern_id'], session['project_name'], session['swatch_width'], 
+                    session['swatch_height'], session['project_width'], 
+                    session['project_height'], session['currentRow'],  
+                    session['currentIndex'])
+
+    return jsonify({'message': 'Project record saved!'})
 
 @app.route('/profile')
 def profile_page():

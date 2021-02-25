@@ -7,13 +7,15 @@
         sWidth: $("#swatch-width").val(),
         sHeight: $("#swatch-height").val(),
         pWidth: $("#project-width").val(),
-        pHeight: $("#project-height").val()
+        pHeight: $("#project-height").val(),
+        pName: $("#project-name").val()
     }
     console.log('formData:', formData);
     let url = `/api/instructions`;
 
     $('#start-knitting').append('<button id="advance-row">Next Row</button>');
-    
+    $('#start-knitting').append('<button id="save-pattern">Save Progress</button>');
+
     $.post(url, formData, (res) => {
         console.log(res);
         $('#stitchname').html(res['pattern_name']);
@@ -27,7 +29,6 @@
         sessionStorage.setItem('currentRow', 0)
         sessionStorage.setItem('indexer', 0)
     })
-
 
     $("#advance-row").on('click', (evt) => {
 
@@ -49,6 +50,17 @@
             sessionStorage.setItem('currentRow', parseInt(sessionStorage.currentRow) + 1);
             sessionStorage.setItem('indexer', parseInt(sessionStorage.indexer) + 1);
         }
+    })
+
+    $("#save-pattern").on('click', (evt) => {
+        const currentProgress = {
+            currentRow: sessionStorage.getItem('currentRow'), 
+            currentIndex: sessionStorage.getItem('indexer')
+        }
+        $.post('/save_pattern', currentProgress, (res) => {
+            console.log(res);
+            $('#save-status').html(res['message']);
+        })
     })
 });
   
