@@ -34,6 +34,12 @@ def get_instruction_array(list_of_objects):
         result.append(line.instruction_text)
     return result
 
+def get_project_object(list_of_objects):
+    result = {}
+    for obj in list_of_objects:
+        result[obj.project_id] = obj.project_name
+    return result
+
 #Routes
 
 @app.route('/')
@@ -160,6 +166,13 @@ def profile_page():
         return render_template('profile.html')
     else:
         return redirect('/login')
+
+@app.route('/api/projects', methods=['POST'])
+def list_projects():
+    """Retrieve and return project records associated with user."""
+    all_user_projects = ProjectRecord.query.filter(ProjectRecord.user_id == session['user_id']).all()
+    response = get_project_object(all_user_projects)
+    return jsonify(response)
 
 @app.route('/photos')
 def photos_page():

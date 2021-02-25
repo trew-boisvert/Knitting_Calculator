@@ -63,4 +63,12 @@
         })
     })
 });
-  
+
+$("#display-project-list").on('click', (evt) => {
+    $.post('/api/projects', (res) => {
+        console.log(res);
+        for(const key in res){
+            $('#current-projects').append(`<ul value="${key}">${res[key]}</ul>`)
+        }
+    })
+})
