@@ -73,6 +73,29 @@ $("#display-project-list").on('click', (evt) => {
     })
 })
 
-// $("#continue-from-save").on('click', (evt))
-//finish this function
-//<button id="continue-from-save" value="${key}">${res[key]}</button>
+$("#resume-knitting").on('click', (evt) => {
+    evt.preventDefault();
+
+    const projectData = {
+        id-c: $("#id-c").val(),
+        pattern-c: $("#pattern-c").val(),
+        swatchwidth-c: $("#swatchwidth-c").val(),
+        swatchheight-c: $("#swatchheight-c").val(),
+        projectwidth-c: $("#projectwidth-c").val(),
+        projectheight-c: $("#projectheight-c").val(),
+        currentrow-c: $("#currentrow-c").val(),
+        currentindex-c: $("#currentindex-c").val()
+    }
+})
+
+
+
+    
+// const formData = {
+//     patID: $("#pattern-id").val(),
+//     sWidth: $("#swatch-width").val(),
+//     sHeight: $("#swatch-height").val(),
+//     pWidth: $("#project-width").val(),
+//     pHeight: $("#project-height").val(),
+//     pName: $("#project-name").val()
+// }
