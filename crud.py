@@ -74,6 +74,10 @@ def get_projects():
 
     return ProjectRecord.query.all()
 
+def get_project_by_id(id):
+    """Find a project record by project_id."""
+    return ProjectRecord.query.filter(ProjectRecord.project_id == id).first()
+
 def get_users():
     """Return all users."""
 

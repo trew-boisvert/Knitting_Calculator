@@ -174,6 +174,14 @@ def list_projects():
     response = get_project_object(all_user_projects)
     return jsonify(response)
 
+@app.route('/projectcontinue/<project_id>')
+def continue_knitting(project_id):
+    """View Continue-Knitting page."""
+
+    project = crud.get_project_by_id(project_id)
+
+    return render_template('projectcontinue.html', project=project)
+
 @app.route('/photos')
 def photos_page():
     """View photos page."""

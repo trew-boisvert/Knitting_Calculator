@@ -68,7 +68,11 @@ $("#display-project-list").on('click', (evt) => {
     $.post('/api/projects', (res) => {
         console.log(res);
         for(const key in res){
-            $('#current-projects').append(`<ul value="${key}">${res[key]}</ul>`)
+            $('#current-projects').append(`<li><a href="/projectcontinue/${key}">${res[key]}</a></li>`)
         }
     })
 })
+
+// $("#continue-from-save").on('click', (evt))
+//finish this function
+//<button id="continue-from-save" value="${key}">${res[key]}</button>
