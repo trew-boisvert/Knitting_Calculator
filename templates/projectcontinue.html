@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Knit From Save{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block bodytitle %}
+    <h1>Project Continue Calculator</h1> 
+    <h2>Keep knitting! {{project.project_id}}</h2>
+{% endblock %}
+
+{% block body %}
+  <p>This should display current spot in project, and have next and prev buttons.</p>
+  <div id="id" value="{{project.project_id}}"></div>
+  <div id="name" value="{{project.project_name}}">{{project.project_name}}</div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+{% endblock %}
+
+{% block after_body %}{% endblock %}
