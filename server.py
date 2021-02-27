@@ -174,13 +174,45 @@ def list_projects():
     response = get_project_object(all_user_projects)
     return jsonify(response)
 
-@app.route('/projectcontinue/<project_id>')
+@app.route('/projectcontinue/<project_id>', methods=['POST', 'GET'])
 def continue_knitting(project_id):
     """View Continue-Knitting page."""
 
     project = crud.get_project_by_id(project_id)
 
+    session['project_id'] = project.project_id
+    session['project_name'] = project.project_name
+    session['pattern_id'] = project.pattern_id
+    session['swatch_width'] = project.swatch_width
+    session['swatch_height'] = project.swatch_height
+    session['project_width'] = project.project_width
+    session['project_height'] = project.project_height
+    session['currentRow'] = project.current_row
+    session['currentIndex'] = project.current_index
+
+    stitchChoice = Pattern.query.get(project.pattern_id)
+    all_instructions_table = Instruction.query.filter(Instruction.pattern_id == project.pattern_id).order_by(Instruction.instruction_row).all()
+    stitchInstructions = get_instruction_array(all_instructions_table)
+    cast_on = calculate_width(project.swatch_width, project.project_width, stitchChoice.pattern_repeat_width)
+    row_total = calculate_height(project.swatch_height, project.project_height, stitchChoice.pattern_repeat_height)
+    
+    session['cast_on'] = cast_on
+    session['row_total'] = row_total
+    session['stitchInstructions'] = stitchInstructions
+    session.modified = True
+    print(session)
+
     return render_template('projectcontinue.html', project=project)
+
+@app.route('/api/projectcontinue', methods=['POST'])
+def load_progress_to_calculator():
+    """Calculate and return values needed to continue project from last save point."""
+    
+    return jsonify({'cast_on': session['cast_on'],
+                    'row_total': session['row_total'],
+                    'stitch': session['stitchInstructions'],
+                    'currentRow': session['currentRow'], 
+                    'currentIndex': session['currentIndex']})
 
 @app.route('/photos')
 def photos_page():

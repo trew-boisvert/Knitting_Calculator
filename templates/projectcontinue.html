@@ -11,15 +11,11 @@
 
 {% block body %}
   <p>This should display current spot in project, and have next and prev buttons.</p>
-  <div id="id-c" value="{{project.project_id}}"></div>
+
   <div id="name-c" value="{{project.project_name}}">{{project.project_name}}</div>
-  <div id="pattern-c" value="{{project.pattern_id}}"></div>
-  <div id="swatchwidth-c" value="{{project.swatch_width}}"></div>
-  <div id="swatchheight-c" value="{{project.swatch_height}}"></div>
   <div id="projectwidth-c" value="{{project.project_width}}">Finished width: {{ project.project_width }}</div>
   <div id="projectheight-c" value="{{project.project_height}}">Finished height: {{ project.project_height }}</div>
-  <div id="currentrow-c" value="{{project.current_row}}"></div>
-  <div id="currentindex-c" value="{{project.current_index}}"></div>
+  
   <button id="resume-knitting">Knit!</button>
   <dd id="keep-knitting"></dd>
 {% endblock %}

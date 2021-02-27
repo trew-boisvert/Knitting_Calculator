@@ -76,26 +76,16 @@ $("#display-project-list").on('click', (evt) => {
 $("#resume-knitting").on('click', (evt) => {
     evt.preventDefault();
 
-    const projectData = {
-        id-c: $("#id-c").val(),
-        pattern-c: $("#pattern-c").val(),
-        swatchwidth-c: $("#swatchwidth-c").val(),
-        swatchheight-c: $("#swatchheight-c").val(),
-        projectwidth-c: $("#projectwidth-c").val(),
-        projectheight-c: $("#projectheight-c").val(),
-        currentrow-c: $("#currentrow-c").val(),
-        currentindex-c: $("#currentindex-c").val()
-    }
+    $('#keep-knitting').append('<button id="next-row">Next Row</button>');
+    $('#keep-knitting').append('<button id="previous-row">Previous Row</button>');
+
+    $.post('/api/projectcontinue', (res) => {
+        console.log(res);
+
+        sessionStorage.setItem('row_total', res['row_total']);
+        sessionStorage.setItem('stitchInstructions', res['stitch'])
+        sessionStorage.setItem('currentRow', res['currentRow'])
+        sessionStorage.setItem('indexer', res['currentIndex'])
+    })
 })
 
-
-
-    
-// const formData = {
-//     patID: $("#pattern-id").val(),
-//     sWidth: $("#swatch-width").val(),
-//     sHeight: $("#swatch-height").val(),
-//     pWidth: $("#project-width").val(),
-//     pHeight: $("#project-height").val(),
-//     pName: $("#project-name").val()
-// }
