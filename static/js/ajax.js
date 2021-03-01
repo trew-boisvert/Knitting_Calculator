@@ -92,7 +92,21 @@ $("#resume-knitting").on('click', (evt) => {
         $('#keep-knitting-stitch').html(`<p>Row ${sessionStorage.getItem('currentRow')}: ${stitch[sessionStorage.indexer]}</p>`)
         console.log('Indexer', sessionStorage.indexer)
 
-        
+        $("#next-row").on('click', (evt) => {
+            evt.preventDefault();
+            if(sessionStorage.currentRow === sessionStorage.row_total){
+                $('#keep-knitting-stitch').html(`<ul>That's all!  Cast off and you're done!</ul>`);
+            } 
+            else {
+                if(parseInt(sessionStorage.indexer) === stitch.length){
+                    sessionStorage.setItem('indexer', 0);
+                }
+                $('#keep-knitting-stitch').html(`<ul>Row ${parseInt(sessionStorage.currentRow) + 1}</ul><ul>${stitch[parseInt(sessionStorage.indexer)]}</ul>`)
+                sessionStorage.setItem('currentRow', parseInt(sessionStorage.currentRow) + 1);
+                sessionStorage.setItem('indexer', parseInt(sessionStorage.indexer) + 1);
+
+            }
+        })
         //write event listener for next button
             //should increment index + row total, save here and on server
         //write event listener for prev button
