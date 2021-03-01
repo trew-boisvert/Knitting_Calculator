@@ -1,5 +1,4 @@
-
- $("#start-project").on('submit', (evt) => {
+$("#start-project").on('submit', (evt) => {
     evt.preventDefault();
     
     const formData = {
@@ -83,9 +82,21 @@ $("#resume-knitting").on('click', (evt) => {
         console.log(res);
 
         sessionStorage.setItem('row_total', res['row_total']);
-        sessionStorage.setItem('stitchInstructions', res['stitch'])
-        sessionStorage.setItem('currentRow', res['currentRow'])
-        sessionStorage.setItem('indexer', res['currentIndex'])
+        sessionStorage.setItem('stitchInstructions', res['stitch']);
+        sessionStorage.setItem('currentRow', res['currentRow']);
+        sessionStorage.setItem('indexer', res['currentIndex']);
+        sessionStorage.setItem('cast_on', res['cast_on']);
+        let stitch = sessionStorage.getItem('stitchInstructions').split(".,");
+
+        $('#keep-knitting').append(`<p>This project is ${sessionStorage.getItem('cast_on')} stitches wide and will have ${sessionStorage.getItem('row_total')} rows.</p>`)
+        $('#keep-knitting-stitch').html(`<p>Row ${sessionStorage.getItem('currentRow')}: ${stitch[sessionStorage.indexer]}</p>`)
+        console.log('Indexer', sessionStorage.indexer)
+
+        
+        //write event listener for next button
+            //should increment index + row total, save here and on server
+        //write event listener for prev button
+            //should decrement index + row total, save here and on server
     })
 })
 
