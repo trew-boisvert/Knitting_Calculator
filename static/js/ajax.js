@@ -145,10 +145,5 @@ $("#resume-knitting").on('click', (evt) => {
                 })                
             }
         })
-        //write event listener for next button
-            //should increment index + row total, save here and on server
-        //write event listener for prev button
-            //should decrement index + row total, save here and on server
     })
 })
-
