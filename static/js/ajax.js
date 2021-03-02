@@ -86,25 +86,63 @@ $("#resume-knitting").on('click', (evt) => {
         sessionStorage.setItem('currentRow', res['currentRow']);
         sessionStorage.setItem('indexer', res['currentIndex']);
         sessionStorage.setItem('cast_on', res['cast_on']);
-        let stitch = sessionStorage.getItem('stitchInstructions').split(".,");
+        let stitch = sessionStorage.getItem('stitchInstructions');
+        stitch = stitch.split(".,");
 
         $('#keep-knitting').append(`<p>This project is ${sessionStorage.getItem('cast_on')} stitches wide and will have ${sessionStorage.getItem('row_total')} rows.</p>`)
-        $('#keep-knitting-stitch').html(`<p>Row ${sessionStorage.getItem('currentRow')}: ${stitch[sessionStorage.indexer]}</p>`)
+        $('#keep-knitting-stitch').html(`<p>Row ${parseInt(sessionStorage.currentRow) + 1}: ${stitch[parseInt(sessionStorage.indexer)]}</p>`)
         console.log('Indexer', sessionStorage.indexer)
-
+//incrementing is off on next/prev buttons
         $("#next-row").on('click', (evt) => {
             evt.preventDefault();
             if(sessionStorage.currentRow === sessionStorage.row_total){
                 $('#keep-knitting-stitch').html(`<ul>That's all!  Cast off and you're done!</ul>`);
             } 
             else {
-                if(parseInt(sessionStorage.indexer) === stitch.length){
-                    sessionStorage.setItem('indexer', 0);
-                }
-                $('#keep-knitting-stitch').html(`<ul>Row ${parseInt(sessionStorage.currentRow) + 1}</ul><ul>${stitch[parseInt(sessionStorage.indexer)]}</ul>`)
                 sessionStorage.setItem('currentRow', parseInt(sessionStorage.currentRow) + 1);
                 sessionStorage.setItem('indexer', parseInt(sessionStorage.indexer) + 1);
 
+                if(parseInt(sessionStorage.indexer) === stitch.length){
+                    sessionStorage.setItem('indexer', 0);
+                    sessionStorage.getItem('indexer');
+                }
+
+                $('#keep-knitting-stitch').html(`<ul>Row ${parseInt(sessionStorage.currentRow) + 1}</ul><ul>${stitch[parseInt(sessionStorage.indexer)]}</ul>`)
+
+                const updatedNumbers = {
+                    currentRow: sessionStorage.getItem('currentRow'),
+                    currentIndex: sessionStorage.getItem('indexer')
+                }
+
+                $.post('/api/savecontinue', updatedNumbers, (res) => {
+                    console.log(res);
+                })
+            }
+        })
+        $("#previous-row").on('click', (evt) => {
+            evt.preventDefault();
+            if(sessionStorage.currentRow === '0'){
+                $('#keep-knitting-stitch').html(`<ul>Cast on ${sessionStorage.cast_on} stitches.</ul>`);
+            }
+            else {
+                sessionStorage.setItem('currentRow', parseInt(sessionStorage.currentRow) - 1);
+                sessionStorage.setItem('indexer', parseInt(sessionStorage.indexer) - 1);
+
+                if(parseInt(sessionStorage.indexer) === -1){
+                    sessionStorage.setItem('indexer', (stitch.length - 1));
+                    sessionStorage.getItem('indexer');
+                }
+
+                $('#keep-knitting-stitch').html(`<ul>Row ${parseInt(sessionStorage.currentRow) + 1}</ul><ul>${stitch[parseInt(sessionStorage.indexer)]}</ul>`)
+
+                const updatedNumbers = {
+                    currentRow: sessionStorage.getItem('currentRow'),
+                    currentIndex: sessionStorage.getItem('indexer')
+                }
+                
+                $.post('/api/savecontinue', updatedNumbers, (res) => {
+                    console.log(res);
+                })                
             }
         })
         //write event listener for next button

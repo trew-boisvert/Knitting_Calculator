@@ -63,6 +63,17 @@ def create_instruction(pattern_id, instruction_row, instruction_text):
 
     return instruction
 
+def save_progress(projectID, current_row, current_index):
+    """Save changes in current row and current index to project record in database."""
+
+    project = ProjectRecord.query.get(projectID)
+    project.current_row = current_row
+    project.current_index = current_index
+
+    db.session.add(project)
+    db.session.commit()
+
+    return project
 
 def get_patterns():
     """Return all patterns."""
@@ -87,6 +98,7 @@ def find_user_by_email(email):
     """Find a user by their email address."""
 
     return User.query.filter(User.user_email == email).first()
+
 
 if __name__ == '__main__':
     from server import app

@@ -214,6 +214,20 @@ def load_progress_to_calculator():
                     'currentRow': session['currentRow'], 
                     'currentIndex': session['currentIndex']})
 
+@app.route('/api/savecontinue', methods=['POST'])
+def savecontinue():
+    """Save progress from Continue Calculator on Next/Prev button click."""
+    currentRow = int(request.form.get('currentRow'))
+    currentIndex = int(request.form.get('currentIndex'))
+
+    session['currentRow'] = currentRow
+    session['currentIndex'] = currentIndex
+    session.modified = True
+
+    crud.save_progress(session['project_id'], currentRow, currentIndex)
+
+    return jsonify({'message': 'Project record saved!'})    
+
 @app.route('/photos')
 def photos_page():
     """View photos page."""
