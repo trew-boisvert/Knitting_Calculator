@@ -75,8 +75,8 @@ $("#display-project-list").on('click', (evt) => {
 $("#resume-knitting").on('click', (evt) => {
     evt.preventDefault();
 
-    $('#keep-knitting').append('<button id="next-row">Next Row</button>');
     $('#keep-knitting').append('<button id="previous-row">Previous Row</button>');
+    $('#keep-knitting').append('<button id="next-row">Next Row</button>');
 
     $.post('/api/projectcontinue', (res) => {
         console.log(res);
@@ -92,7 +92,7 @@ $("#resume-knitting").on('click', (evt) => {
         $('#keep-knitting').append(`<p>This project is ${sessionStorage.getItem('cast_on')} stitches wide and will have ${sessionStorage.getItem('row_total')} rows.</p>`)
         $('#keep-knitting-stitch').html(`<p>Row ${parseInt(sessionStorage.currentRow) + 1}: ${stitch[parseInt(sessionStorage.indexer)]}</p>`)
         console.log('Indexer', sessionStorage.indexer)
-//incrementing is off on next/prev buttons
+
         $("#next-row").on('click', (evt) => {
             evt.preventDefault();
             if(sessionStorage.currentRow === sessionStorage.row_total){
