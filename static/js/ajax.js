@@ -13,7 +13,7 @@ $("#start-project").on('submit', (evt) => {
     let url = `/api/instructions`;
 
     $('#start-knitting').append('<button id="advance-row">Next Row</button>');
-    $('#start-knitting').append('<button id="save-pattern">Save Progress</button>');
+    $('#start-knitting').append('<button id="save-pattern">Save Project</button>');
 
     $.post(url, formData, (res) => {
         console.log(res);
@@ -67,7 +67,7 @@ $("#display-project-list").on('click', (evt) => {
     $.post('/api/projects', (res) => {
         console.log(res);
         for(const key in res){
-            $('#current-projects').append(`<li><a href="/projectcontinue/${key}">${res[key]}</a></li>`)
+            $('#current-projects').append(`<li><a href="/projectcontinue/${key}">${res[key]}</a><a href="/delete/${key}">Delete Project</a></li>`)
         }
     })
 })

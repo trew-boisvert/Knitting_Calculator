@@ -174,6 +174,16 @@ def list_projects():
     response = get_project_object(all_user_projects)
     return jsonify(response)
 
+@app.route('/delete/<project_id>', methods=['POST', 'GET'])
+def delete_project(project_id):
+    """Show delete page for a selected project record."""
+
+    project = crud.get_project_by_id(project_id)
+    session['to_delete'] = project.project_id
+    session.modified = True
+
+    return render_template('delete.html', project=project)
+
 @app.route('/projectcontinue/<project_id>', methods=['POST', 'GET'])
 def continue_knitting(project_id):
     """View Continue-Knitting page."""
