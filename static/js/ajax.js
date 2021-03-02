@@ -90,7 +90,7 @@ $("#resume-knitting").on('click', (evt) => {
         stitch = stitch.split(".,");
 
         $('#keep-knitting').append(`<p>This project is ${sessionStorage.getItem('cast_on')} stitches wide and will have ${sessionStorage.getItem('row_total')} rows.</p>`)
-        $('#keep-knitting-stitch').html(`<p>Row ${parseInt(sessionStorage.currentRow) + 1}: ${stitch[parseInt(sessionStorage.indexer)]}</p>`)
+        $('#keep-knitting-stitch').html(`<p>Row ${parseInt(sessionStorage.currentRow) + 1}:</p><p>${stitch[parseInt(sessionStorage.indexer)]}</p>`)
         console.log('Indexer', sessionStorage.indexer)
 
         $("#next-row").on('click', (evt) => {
@@ -107,7 +107,7 @@ $("#resume-knitting").on('click', (evt) => {
                     sessionStorage.getItem('indexer');
                 }
 
-                $('#keep-knitting-stitch').html(`<ul>Row ${parseInt(sessionStorage.currentRow) + 1}</ul><ul>${stitch[parseInt(sessionStorage.indexer)]}</ul>`)
+                $('#keep-knitting-stitch').html(`<ul>Row ${parseInt(sessionStorage.currentRow) + 1}:</ul><ul>${stitch[parseInt(sessionStorage.indexer)]}</ul>`)
 
                 const updatedNumbers = {
                     currentRow: sessionStorage.getItem('currentRow'),
@@ -133,7 +133,7 @@ $("#resume-knitting").on('click', (evt) => {
                     sessionStorage.getItem('indexer');
                 }
 
-                $('#keep-knitting-stitch').html(`<ul>Row ${parseInt(sessionStorage.currentRow) + 1}</ul><ul>${stitch[parseInt(sessionStorage.indexer)]}</ul>`)
+                $('#keep-knitting-stitch').html(`<ul>Row ${parseInt(sessionStorage.currentRow) + 1}:</ul><ul>${stitch[parseInt(sessionStorage.indexer)]}</ul>`)
 
                 const updatedNumbers = {
                     currentRow: sessionStorage.getItem('currentRow'),
