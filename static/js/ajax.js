@@ -52,6 +52,9 @@ $("#start-project").on('submit', (evt) => {
     })
 
     $("#save-pattern").on('click', (evt) => {
+        $('#save-pattern').hide();
+        $('#advance-row').hide();
+    
         const currentProgress = {
             currentRow: sessionStorage.getItem('currentRow'), 
             currentIndex: sessionStorage.getItem('indexer')
