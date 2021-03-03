@@ -64,6 +64,7 @@ $("#start-project").on('submit', (evt) => {
 });
 
 $("#display-project-list").on('click', (evt) => {
+    $('#display-project-list').hide();
     $.post('/api/projects', (res) => {
         console.log(res);
         for(const key in res){
