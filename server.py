@@ -54,6 +54,16 @@ def login_page():
 
     return render_template('login.html')
 
+@app.route('/logout')
+def logout_page():
+    """View logout page."""
+
+    if session['logged_in'] == True:
+        return render_template('logout.html')
+    else:
+        flash('You are not logged in.')
+        return redirect('/login')
+
 @app.route('/handle-login', methods=['POST'])
 def handle_login():
     """Log the user into the application."""
@@ -71,6 +81,14 @@ def handle_login():
     print(session)
     flash(f'Logged in as {user.user_name}')    
     return redirect('/profile')
+
+@app.route('/handle-logout', methods=['POST'])
+def handle_logout():
+    """Log the user out of the application."""
+
+    session['logged_in'] = False
+
+    return jsonify({'message': 'Successfully logged out!'})    
 
 @app.route('/new-account', methods=['POST'])
 def create_new_user():

@@ -30,7 +30,7 @@ $("#start-project").on('submit', (evt) => {
     })
 
     $("#advance-row").on('click', (evt) => {
-
+        
         let stitch = sessionStorage.getItem('stitchInstructions').split(".,");
         console.log(sessionStorage.getItem('stitchInstructions'));
 
@@ -41,7 +41,7 @@ $("#start-project").on('submit', (evt) => {
             $('#start-knitting').append(`<ul>That's all!  Cast off and you're done!</ul>`);
         }
         else{
-//bind numbers to variable and use that instead of parseing all the time
+//TODO bind numbers to variable and use that instead of parseing all the time
             if(parseInt(sessionStorage.indexer) === stitch.length){
                 sessionStorage.setItem('indexer', 0);
             }
@@ -66,6 +66,13 @@ $("#start-project").on('submit', (evt) => {
     })
 });
 
+$("#logout").on('click', (evt) => {
+    $('#logout').hide();
+    $.post('handle-logout', (res) => {
+        $('#logout-text').html(res['message'])
+    })
+})
+
 $("#display-project-list").on('click', (evt) => {
     $('#display-project-list').hide();
     $.post('/api/projects', (res) => {
@@ -76,6 +83,7 @@ $("#display-project-list").on('click', (evt) => {
     })
 })
 
+//this deletes projects.  not to be confused with deleting a user profile.
 $("#goodbye-forever").on('click', (evt) => {
     $.post('/api/delete', (res) => {
         console.log(res);
