@@ -75,6 +75,16 @@ def save_progress(projectID, current_row, current_index):
 
     return project
 
+def delete_user_project(projectID):
+    """Delete a project record from the database."""
+
+    project = ProjectRecord.query.get(projectID)
+
+    db.session.delete(project)
+    db.session.commit()
+
+    return
+
 def get_patterns():
     """Return all patterns."""
 

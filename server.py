@@ -175,7 +175,7 @@ def list_projects():
     return jsonify(response)
 
 @app.route('/delete/<project_id>', methods=['POST', 'GET'])
-def delete_project(project_id):
+def ask_if_delete_project(project_id):
     """Show delete page for a selected project record."""
 
     project = crud.get_project_by_id(project_id)
@@ -183,6 +183,14 @@ def delete_project(project_id):
     session.modified = True
 
     return render_template('delete.html', project=project)
+
+@app.route('/api/delete', methods=['POST'])
+def delete_project():
+    """Delete selected user project from database."""
+
+    crud.delete_user_project(session['to_delete'])
+
+    return jsonify({'message': 'Project record destroyed!'})
 
 @app.route('/projectcontinue/<project_id>', methods=['POST', 'GET'])
 def continue_knitting(project_id):
