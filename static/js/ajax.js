@@ -75,8 +75,9 @@ $("#display-project-list").on('click', (evt) => {
 $("#goodbye-forever").on('click', (evt) => {
     $.post('/api/delete', (res) => {
         console.log(res);
-        $('#goodbye-forever').html(res['message']);
-        $('#goodbye-forever').append(`<a href="http://0.0.0.0:5000/profile">Return to Profile</a>`)
+        $('#goodbye-forever').hide();
+        $('#say-goodbye').append(`<p>${res['message']}</p>`);
+        $('#say-goodbye').append(`<a href="http://0.0.0.0:5000/profile">Return to Profile</a>`);
     })
 })
 
