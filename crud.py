@@ -85,6 +85,17 @@ def delete_user_project(projectID):
 
     return
 
+def delete_all_projects_for_single_user(userID):
+    """Delete all of the project records of a single user."""
+
+    projects = ProjectRecord.query.filter(ProjectRecord.user_id == userID).all()
+
+    for project in projects:
+            db.session.delete(project)
+            db.session.commit()
+
+    return
+
 def get_patterns():
     """Return all patterns."""
 

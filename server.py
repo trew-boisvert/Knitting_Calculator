@@ -210,6 +210,14 @@ def delete_project():
 
     return jsonify({'message': 'Project record destroyed!'})
 
+@app.route('/api/accountdelete', methods=['POST'])
+def delete_user_account():
+    """Delete user account and related project records from database."""
+
+    crud.delete_all_projects_for_single_user(session['user_id'])
+
+    return jsonify({'message': 'Project records for this user destroyed!'})
+
 @app.route('/projectcontinue/<project_id>', methods=['POST', 'GET'])
 def continue_knitting(project_id):
     """View Continue-Knitting page."""

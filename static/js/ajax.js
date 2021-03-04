@@ -93,6 +93,14 @@ $("#goodbye-forever").on('click', (evt) => {
     })
 })
 
+//this deletes a user profile, and their attendant projects.
+$("#delete-account").on('click', (evt) => {
+    $.post('/api/accountdelete', (res) => {
+        $('#delete-account').hide();
+        $('#delete-account-text').append(`<p>${res['message']}</p>`);
+    })
+})
+
 $("#resume-knitting").on('click', (evt) => {
     evt.preventDefault();
 
