@@ -215,8 +215,10 @@ def delete_user_account():
     """Delete user account and related project records from database."""
 
     crud.delete_all_projects_for_single_user(session['user_id'])
+    crud.delete_user(session['user_id'])
+    session['logged_in'] = False
 
-    return jsonify({'message': 'Project records for this user destroyed!'})
+    return jsonify({'message': 'Account destroyed!'})
 
 @app.route('/projectcontinue/<project_id>', methods=['POST', 'GET'])
 def continue_knitting(project_id):

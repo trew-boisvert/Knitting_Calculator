@@ -68,6 +68,7 @@ $("#start-project").on('submit', (evt) => {
 
 $("#logout").on('click', (evt) => {
     $('#logout').hide();
+    $('#delete-account').hide();
     $.post('handle-logout', (res) => {
         $('#logout-text').html(res['message'])
     })
@@ -97,6 +98,7 @@ $("#goodbye-forever").on('click', (evt) => {
 $("#delete-account").on('click', (evt) => {
     $.post('/api/accountdelete', (res) => {
         $('#delete-account').hide();
+        $('#logout').hide();
         $('#delete-account-text').append(`<p>${res['message']}</p>`);
     })
 })

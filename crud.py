@@ -85,6 +85,16 @@ def delete_user_project(projectID):
 
     return
 
+def delete_user(userID):
+    """Delete a user from the database."""
+
+    user = User.query.get(userID)
+
+    db.session.delete(user)
+    db.session.commit()
+
+    return
+
 def delete_all_projects_for_single_user(userID):
     """Delete all of the project records of a single user."""
 
