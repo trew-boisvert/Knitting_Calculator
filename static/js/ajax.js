@@ -12,9 +12,6 @@ $("#start-project").on('submit', (evt) => {
     console.log('formData:', formData);
     let url = `/api/instructions`;
 
-    $('#start-knitting').append('<button id="advance-row">Next Row</button>');
-    $('#start-knitting').append('<button id="save-pattern">Save Project</button>');
-
     $.post(url, formData, (res) => {
         console.log(res);
         $('#stitchname').html(res['pattern_name']);
@@ -28,6 +25,9 @@ $("#start-project").on('submit', (evt) => {
         sessionStorage.setItem('currentRow', 0)
         sessionStorage.setItem('indexer', 0)
     })
+
+    $('#start-knitting').append('<button id="advance-row">Next Row</button>');
+    $('#start-knitting').append('<button id="save-pattern">Save Project</button>');
 
     $("#advance-row").on('click', (evt) => {
         
@@ -108,9 +108,6 @@ $("#resume-knitting").on('click', (evt) => {
 
     $('#resume-knitting').hide();
 
-    $('#keep-knitting').append('<button id="previous-row">Previous Row</button>');
-    $('#keep-knitting').append('<button id="next-row">Next Row</button>');
-
     $.post('/api/projectcontinue', (res) => {
         console.log(res);
 
@@ -125,6 +122,8 @@ $("#resume-knitting").on('click', (evt) => {
         $('#keep-knitting').append(`<p>This project is ${sessionStorage.getItem('cast_on')} stitches wide and will have ${sessionStorage.getItem('row_total')} rows.</p>`)
         $('#keep-knitting-stitch').html(`<p>Row ${parseInt(sessionStorage.currentRow) + 1}:</p><p>${stitch[parseInt(sessionStorage.indexer)]}</p>`)
         console.log('Indexer', sessionStorage.indexer)
+        $('#keep-knitting').append('<button id="previous-row">Previous Row</button>');
+        $('#keep-knitting').append('<button id="next-row">Next Row</button>');
 
         $("#next-row").on('click', (evt) => {
             evt.preventDefault();

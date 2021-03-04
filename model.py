@@ -80,7 +80,7 @@ class Instruction(db.Model):
 
 def connect_to_db(app):
     """Connect the database to our Flask app."""
-#TODO why postgres, not postgresql???
+#try just writing 'knitting' without postgres//// see if it works
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///knitting'
     app.config['SQLALCHEMY_ECHO'] = False
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
