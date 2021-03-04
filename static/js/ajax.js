@@ -106,6 +106,8 @@ $("#delete-account").on('click', (evt) => {
 $("#resume-knitting").on('click', (evt) => {
     evt.preventDefault();
 
+    $('#resume-knitting').hide();
+
     $('#keep-knitting').append('<button id="previous-row">Previous Row</button>');
     $('#keep-knitting').append('<button id="next-row">Next Row</button>');
 
