@@ -2,6 +2,9 @@ from flask import Flask, jsonify, render_template, request, flash, session, redi
 from model import connect_to_db, User, ProjectRecord, Pattern, Instruction
 import crud
 from jinja2 import StrictUndefined
+import cloudinary as Cloud
+import cloudinary.uploader
+import cloudinary.api
 from werkzeug.security import generate_password_hash, check_password_hash
 # can do crud.check_password_hash as a refactor, and remove above line
 
@@ -281,6 +284,12 @@ def photos_page():
     """View photos page."""
 
     return render_template('photos.html')
+
+@app.route('/customstitch')
+def custom_stitch_page():
+    """View custom stitch page."""
+
+    return render_template('customstitch.html')
 
 
 if __name__ == '__main__':

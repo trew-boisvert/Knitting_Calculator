@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Custom Stitch Pattern{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block bodytitle %}
+    <h1>Custom Stitch Pattern</h1> 
+    <h2>Save custom stitch patterns.</h2>
+{% endblock %}
+
+{% block body %}
+  <p>Write your own.</p>
+
+  <form>
+      <label for="stitch-name">What is the name of your stitch pattern?</label>
+      <input type="text" id="stitch-name">
+
+      <label for="stitch-description">Please describe your pattern briefly.</label>
+      <input type="text" id="stitch-description">
+
+      <label for="stitch-repeat-width">How many stitches wide is one repeat of your pattern?</label>
+      <input type="text" id="stitch-repeat-width">
+
+      <label for="stitch-repeat-height">How many rows tall is one repeat of your pattern?</label>
+      <input type="text" id="stitch-repeat-height">
+
+      <dl>
+        <label for="new-stitch-row">Please type one row of instruction per text box.</label>
+        <button type="button" id="new-stitch-row">Add another row</button>
+        <input type="text" id="stitch-instructions-list[]">
+        <dd id="stitch-instructions-array"></dd>  
+      </dl>
+  </form>
+{% endblock %}
+
+{% block after_body %}{% endblock %}

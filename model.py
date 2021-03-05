@@ -89,6 +89,11 @@ class Instruction(db.Model):
 #     post_comment = db.Column(db.String(), nullable=False)
 #     post_photo_link = db.Column(db.String(), nullable=True)
 # TODO finish building this class, add table to database, import to appropriate files
+#event source system: describe actions that system and user took.  post: single event, records
+#what user posted, only store fact that user tried to post. given post id with most recent edit number
+#
+
+
 
 def connect_to_db(app):
     """Connect the database to our Flask app."""
