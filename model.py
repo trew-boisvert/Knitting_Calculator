@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime, timezone, timedelta
 
 db = SQLAlchemy()
 
@@ -77,6 +78,17 @@ class Instruction(db.Model):
     def __repr(self):
         return f"<Pattern id= {self.pattern_id} Instructions>"
 
+# class Post(db.Model):
+#     """Data model for posts to discussion board."""
+
+#     __tablename__ = "posts"
+
+#     post_id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
+#     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+#     post_date = db.Column(db.DateTime, nullable=False)
+#     post_comment = db.Column(db.String(), nullable=False)
+#     post_photo_link = db.Column(db.String(), nullable=True)
+# TODO finish building this class, add table to database, import to appropriate files
 
 def connect_to_db(app):
     """Connect the database to our Flask app."""

@@ -111,7 +111,9 @@ def create_new_user():
 def calculator_page():
     """View calculator page."""
 
-    return render_template('calculator.html')
+    patterns = crud.get_patterns()
+
+    return render_template('calculator.html', patterns=patterns)
 
 
 @app.route('/api/instructions', methods=['POST'])

@@ -15,11 +15,9 @@
   <form id="start-project" method="POST">
     <label for="pattern-id">Select a Stitch Pattern:</label>
     <select id="pattern-id" name="pattern_id">
-      <option value="1">Basket Weave 8x8</option>
-      <option value="2">Bird's Eye 4x4</option>
-      <option value="3">Checkerboard 10x10</option>
-      <option value="4">Cat's Eye 4x3</option>
-      <option value="5">Dimple Eyelet 4x8</option>
+      {% for pattern in patterns %}
+        <option value="{{ pattern.pattern_id }}">{{ pattern.pattern_name }}  {{ pattern.pattern_repeat_width }}x{{ pattern.pattern_repeat_height }}</option>
+      {% endfor %}
     </select>
 
     <label for="swatch-width">How wide is your swatch, in centimeters?</label>
