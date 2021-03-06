@@ -96,6 +96,7 @@ def handle_logout():
     """Log the user out of the application."""
 
     session['logged_in'] = False
+    session.modified = True
 
     return jsonify({'message': 'Successfully logged out!'})    
 
@@ -307,21 +308,18 @@ def custom_stitch_page_save():
     stitchRepeatHeight = request.form.get('stitch-repeat-height')
     stitchInstructionsList = request.form.getlist('stitch-instructions-list')
 
-    print(stitchName)
-    print(stitchDescription)
-    print(stitchRepeatWidth)
-    print(stitchRepeatHeight)
-    print(stitchInstructionsList)
-
-    crud.create_pattern(stitchName, stitchDescription, stitchRepeatWidth, stitchRepeatHeight)
-    
     new_pattern = crud.get_pattern_by_name(stitchName)
-   
-    for index in range(len(stitchInstructionsList)):
-        crud.create_instruction(new_pattern.pattern_id, (index + 1), stitchInstructionsList[index])
-    #prosper
-    
-    flash('New stitch pattern saved!')
+
+    if new_pattern:
+        flash('A pattern by this name already exists.')
+    else:
+        new_pattern = crud.create_pattern(stitchName, stitchDescription, stitchRepeatWidth, stitchRepeatHeight)
+        
+        for index in range(len(stitchInstructionsList)):
+            crud.create_instruction(new_pattern.pattern_id, (index + 1), stitchInstructionsList[index])
+        #prosper
+        
+        flash('New stitch pattern saved!')
     return redirect('/customstitch')
 
 
@@ -330,4 +328,9 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
 
 
-
+    # user = crud.find_user_by_email(email)
+    # if user:
+    #     flash('There is already an account with that email address.')
+    # else:
+    #     crud.create_user(username, email, password)
+    #     flash('Your account has been created!  Please log in.')
