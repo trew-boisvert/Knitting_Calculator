@@ -179,3 +179,27 @@ $("#resume-knitting").on('click', (evt) => {
         })
     })
 })
+
+$("#new-stitch-row").on('click', (evt) => {
+    evt.preventDefault();
+    $('#stitch-instructions-array').append('<input type="text" name="stitch-instructions-list">');
+})
+
+// $("#custom-stitch-save").on('submit', (evt) => {
+//     evt.preventDefault();
+
+//     const formData = {
+//         stitchName: $("#stitch-name").val(),
+//         stitchDescription: $("#stitch-description").val(),
+//         stitchRepeatWidth: $("#stitch-repeat-width").val(),
+//         stitchRepeatHeight: $("#stitch-repeat-height").val(),
+//         stitchInstructionsList: $("#stitch-instructions-list").val()
+//     }
+
+//     console.log('formData:', formData);
+
+//     $.post('/api/customstitch', formData, (res) => {
+//         console.log(res);
+//         console.log("Is it working?")
+//     })
+// })

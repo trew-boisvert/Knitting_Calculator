@@ -7,10 +7,16 @@ import cloudinary.uploader
 import cloudinary.api
 from werkzeug.security import generate_password_hash, check_password_hash
 # can do crud.check_password_hash as a refactor, and remove above line
-
+from APIconfig import APIsecret
 app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
+
+cloudinary.config( 
+  cloud_name = "knittr", 
+  api_key = "163782255322919", 
+  api_secret =  APIsecret
+)
 
 # Functions for backend calculations
 
@@ -290,6 +296,33 @@ def custom_stitch_page():
     """View custom stitch page."""
 
     return render_template('customstitch.html')
+
+@app.route('/api/customstitch', methods=['POST'])
+def custom_stitch_page_save():
+    """Save custom stitch pattern."""
+
+    stitchName = request.form.get('stitch-name')
+    stitchDescription = request.form.get('stitch-description')
+    stitchRepeatWidth = request.form.get('stitch-repeat-width')
+    stitchRepeatHeight = request.form.get('stitch-repeat-height')
+    stitchInstructionsList = request.form.getlist('stitch-instructions-list')
+
+    print(stitchName)
+    print(stitchDescription)
+    print(stitchRepeatWidth)
+    print(stitchRepeatHeight)
+    print(stitchInstructionsList)
+
+    crud.create_pattern(stitchName, stitchDescription, stitchRepeatWidth, stitchRepeatHeight)
+    
+    new_pattern = get_pattern_by_name(name)
+   
+    for index in range(len(stitchInstructionsList)):
+        #create each line of instruction w/crud
+    #prosper
+
+    flash('Did it work?')
+    return redirect('/customstitch')
 
 
 if __name__ == '__main__':
