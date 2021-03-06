@@ -120,6 +120,9 @@ def create_new_user():
 @app.route('/calculator')
 def calculator_page():
     """View calculator page."""
+    if session['logged_in'] == False:
+        flash('Please login or create account.')
+        return render_template('login.html')
 
     patterns = crud.get_patterns()
 
@@ -195,6 +198,7 @@ def profile_page():
     if session['logged_in'] == True:
         return render_template('profile.html')
     else:
+        flash('You must be logged in to see profile.')
         return redirect('/login')
 
 @app.route('/api/projects', methods=['POST'])
@@ -207,6 +211,9 @@ def list_projects():
 @app.route('/delete/<project_id>', methods=['POST', 'GET'])
 def ask_if_delete_project(project_id):
     """Show delete page for a selected project record."""
+    if session['logged_in'] == False:
+        flash('Please login or create account.')
+        return render_template('login.html')
 
     project = crud.get_project_by_id(project_id)
     session['to_delete'] = project.project_id
@@ -235,6 +242,10 @@ def delete_user_account():
 @app.route('/projectcontinue/<project_id>', methods=['POST', 'GET'])
 def continue_knitting(project_id):
     """View Continue-Knitting page."""
+
+    if session['logged_in'] == False:
+        flash('Please login or create account.')
+        return render_template('login.html')
 
     project = crud.get_project_by_id(project_id)
 
@@ -295,6 +306,10 @@ def photos_page():
 @app.route('/customstitch')
 def custom_stitch_page():
     """View custom stitch page."""
+    
+    if session['logged_in'] == False:
+        flash('Please login or create account.')
+        return render_template('login.html')
 
     return render_template('customstitch.html')
 
