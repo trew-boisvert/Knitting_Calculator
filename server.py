@@ -315,13 +315,13 @@ def custom_stitch_page_save():
 
     crud.create_pattern(stitchName, stitchDescription, stitchRepeatWidth, stitchRepeatHeight)
     
-    new_pattern = get_pattern_by_name(name)
+    new_pattern = crud.get_pattern_by_name(stitchName)
    
     for index in range(len(stitchInstructionsList)):
-        #create each line of instruction w/crud
+        crud.create_instruction(new_pattern.pattern_id, (index + 1), stitchInstructionsList[index])
     #prosper
-
-    flash('Did it work?')
+    
+    flash('New stitch pattern saved!')
     return redirect('/customstitch')
 
 
