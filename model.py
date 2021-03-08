@@ -93,9 +93,6 @@ class Post(db.Model):
 
     user = db.relationship('User')
 
-# TODO add table to database, add crud
-
-
 def connect_to_db(app):
     """Connect the database to our Flask app."""
 
