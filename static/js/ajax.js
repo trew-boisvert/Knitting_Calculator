@@ -9,11 +9,10 @@ $("#start-project").on('submit', (evt) => {
         pHeight: $("#project-height").val(),
         pName: $("#project-name").val()
     }
-    console.log('formData:', formData);
+    
     let url = `/api/instructions`;
 
     $.post(url, formData, (res) => {
-        console.log(res);
         $('#stitchname').html(res['pattern_name']);
         $('#description').html(res['pattern_description']);
         $('#caston').html(res['cast_on']);
@@ -32,11 +31,7 @@ $("#start-project").on('submit', (evt) => {
     $("#advance-row").on('click', (evt) => {
         
         let stitch = sessionStorage.getItem('stitchInstructions').split(".,");
-        console.log(sessionStorage.getItem('stitchInstructions'));
-
-        console.log('current row', sessionStorage.currentRow);
-        console.log('row total', sessionStorage.row_total);
-        //maybe change append to prepend?
+//maybe change append to prepend?
         if(parseInt(sessionStorage.currentRow) === parseInt(sessionStorage.row_total)){
             $('#start-knitting').append(`<ul>That's all!  Cast off and you're done!</ul>`);
         }
@@ -60,7 +55,6 @@ $("#start-project").on('submit', (evt) => {
             currentIndex: sessionStorage.getItem('indexer')
         }
         $.post('/save_pattern', currentProgress, (res) => {
-            console.log(res);
             $('#save-status').html(res['message']);
         })
     })
@@ -77,7 +71,6 @@ $("#logout").on('click', (evt) => {
 $("#display-project-list").on('click', (evt) => {
     $('#display-project-list').hide();
     $.post('/api/projects', (res) => {
-        console.log(res);
         for(const key in res){
             $('#current-projects').append(`<li><a href="/projectcontinue/${key}">${res[key]}</a><a href="/delete/${key}">Delete Project</a></li>`)
         }
@@ -87,7 +80,6 @@ $("#display-project-list").on('click', (evt) => {
 //this deletes projects.  not to be confused with deleting a user profile.
 $("#goodbye-forever").on('click', (evt) => {
     $.post('/api/delete', (res) => {
-        console.log(res);
         $('#goodbye-forever').hide();
         $('#say-goodbye').append(`<p>${res['message']}</p>`);
         $('#say-goodbye').append(`<a href="http://0.0.0.0:5000/profile">Return to Profile</a>`);
@@ -109,8 +101,6 @@ $("#resume-knitting").on('click', (evt) => {
     $('#resume-knitting').hide();
 
     $.post('/api/projectcontinue', (res) => {
-        console.log(res);
-
         sessionStorage.setItem('row_total', res['row_total']);
         sessionStorage.setItem('stitchInstructions', res['stitch']);
         sessionStorage.setItem('currentRow', res['currentRow']);
@@ -119,9 +109,8 @@ $("#resume-knitting").on('click', (evt) => {
         let stitch = sessionStorage.getItem('stitchInstructions');
         stitch = stitch.split(".,");
 
-        $('#keep-knitting').append(`<p>This project is ${sessionStorage.getItem('cast_on')} stitches wide and will have ${sessionStorage.getItem('row_total')} rows.</p>`)
-        $('#keep-knitting-stitch').html(`<p>Row ${parseInt(sessionStorage.currentRow) + 1}:</p><p>${stitch[parseInt(sessionStorage.indexer)]}</p>`)
-        console.log('Indexer', sessionStorage.indexer)
+        $('#keep-knitting').append(`<p>This project is ${sessionStorage.getItem('cast_on')} stitches wide and will have ${sessionStorage.getItem('row_total')} rows.</p>`);
+        $('#keep-knitting-stitch').html(`<p>Row ${parseInt(sessionStorage.currentRow) + 1}:</p><p>${stitch[parseInt(sessionStorage.indexer)]}</p>`);
         $('#keep-knitting').append('<button id="previous-row">Previous Row</button>');
         $('#keep-knitting').append('<button id="next-row">Next Row</button>');
 
@@ -178,28 +167,9 @@ $("#resume-knitting").on('click', (evt) => {
             }
         })
     })
-})
+});
 
 $("#new-stitch-row").on('click', (evt) => {
     evt.preventDefault();
     $('#stitch-instructions-array').append('<input type="text" name="stitch-instructions-list">');
-})
-
-// $("#custom-stitch-save").on('submit', (evt) => {
-//     evt.preventDefault();
-
-//     const formData = {
-//         stitchName: $("#stitch-name").val(),
-//         stitchDescription: $("#stitch-description").val(),
-//         stitchRepeatWidth: $("#stitch-repeat-width").val(),
-//         stitchRepeatHeight: $("#stitch-repeat-height").val(),
-//         stitchInstructionsList: $("#stitch-instructions-list").val()
-//     }
-
-//     console.log('formData:', formData);
-
-//     $.post('/api/customstitch', formData, (res) => {
-//         console.log(res);
-//         console.log("Is it working?")
-//     })
-// })
+});

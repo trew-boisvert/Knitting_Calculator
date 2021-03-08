@@ -246,6 +246,7 @@ def delete_user_account():
     crud.delete_all_projects_for_single_user(session['user_id'])
     crud.delete_user(session['user_id'])
     session['logged_in'] = False
+    session.modified = True
 
     return jsonify({'message': 'Account destroyed!'})
 
@@ -295,6 +296,7 @@ def load_progress_to_calculator():
 @app.route('/api/savecontinue', methods=['POST'])
 def savecontinue():
     """Save progress from Continue Calculator on Next/Prev button click."""
+    
     currentRow = int(request.form.get('currentRow'))
     currentIndex = int(request.form.get('currentIndex'))
 
