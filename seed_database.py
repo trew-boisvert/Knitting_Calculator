@@ -1,9 +1,5 @@
 """Script to seed database."""
 
-# TODO What does sending it to the database as a list do?  
-# What happens when I pull it out again later?  
-# Where does JSON come into this?
-
 import os
 import json
 from random import choice, randint

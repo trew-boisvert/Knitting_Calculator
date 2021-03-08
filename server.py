@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, render_template, request, flash, session, redirect, url_for
-from model import connect_to_db, User, ProjectRecord, Pattern, Instruction
+from model import connect_to_db, User, ProjectRecord, Pattern, Instruction, Post
 import crud
 from jinja2 import StrictUndefined
 import cloudinary as Cloud

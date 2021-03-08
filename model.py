@@ -16,6 +16,7 @@ class User(db.Model):
     user_name = db.Column(db.String(100), nullable=False)
 
     user_project = db.relationship('ProjectRecord')
+    post = db.relationship('Post')
 
     def __repr__(self):
         """Show info about user."""
@@ -78,26 +79,26 @@ class Instruction(db.Model):
     def __repr(self):
         return f"<Pattern id= {self.pattern_id} Instructions>"
 
-# class Post(db.Model):
-#     """Data model for posts to discussion board."""
+class Post(db.Model):
+    """Data model for posts to discussion board."""
 
-#     __tablename__ = "posts"
+    __tablename__ = "posts"
 
-#     post_id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
-#     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
-#     post_date = db.Column(db.DateTime, nullable=False)
-#     post_comment = db.Column(db.String(), nullable=False)
-#     post_photo_link = db.Column(db.String(), nullable=True)
-# TODO finish building this class, add table to database, import to appropriate files
-#event source system: describe actions that system and user took.  post: single event, records
-#what user posted, only store fact that user tried to post. given post id with most recent edit number
-#
+    post_id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'), nullable=False)
+    post_date = db.Column(db.DateTime, nullable=False)
+    post_title = db.Column(db.String(), nullable=False)
+    post_comment = db.Column(db.String(), nullable=True)
+    post_photo_link = db.Column(db.String(), nullable=False)
 
+    user = db.relationship('User')
+
+# TODO add table to database, add crud
 
 
 def connect_to_db(app):
     """Connect the database to our Flask app."""
-#try just writing 'knitting' without postgres//// see if it works
+
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///knitting'
     app.config['SQLALCHEMY_ECHO'] = False
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
