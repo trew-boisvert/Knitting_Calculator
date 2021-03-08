@@ -102,8 +102,9 @@ def delete_all_projects_for_single_user(userID):
 
     for project in projects:
             db.session.delete(project)
-            db.session.commit()
-
+            
+    db.session.commit()
+    
     return
 
 def get_patterns():
