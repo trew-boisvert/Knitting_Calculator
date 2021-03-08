@@ -69,25 +69,27 @@ def logout_page():
 
     if session['logged_in'] == True:
         return render_template('logout.html')
-    else:
-        flash('You are not logged in.')
-        return redirect('/login')
+    
+    flash('You are not logged in.')
+    return redirect('/login')
 
 @app.route('/handle-login', methods=['POST'])
 def handle_login():
     """Log the user into the application."""
+
     email = request.form.get('email')
     password = request.form.get('password')
 
     user = User.query.filter_by(user_email=email).first()
 
-    if not user or not check_password_hash(user.user_password, password):
+    if not user or not crud.check_password_hash(user.user_password, password):
         flash('Incorrect email/password.  Please try again')
         return redirect('/login')
+
     session['logged_in'] = True
     session['user_id'] = user.user_id
     session.modified = True
-    print(session)
+    
     flash(f'Logged in as {user.user_name}')    
     return redirect('/profile')
 
@@ -120,6 +122,7 @@ def create_new_user():
 @app.route('/calculator')
 def calculator_page():
     """View calculator page."""
+
     if session['logged_in'] == False:
         flash('Please login or create account.')
         return render_template('login.html')
@@ -127,7 +130,6 @@ def calculator_page():
     patterns = crud.get_patterns()
 
     return render_template('calculator.html', patterns=patterns)
-
 
 @app.route('/api/instructions', methods=['POST'])
 def instructions():
@@ -177,6 +179,7 @@ def instructions():
 @app.route('/save_pattern', methods=['POST'])
 def save_pattern():
     """Save an in-progress pattern to user profile."""
+
     currentRow = int(request.form.get('currentRow'))
     currentIndex = int(request.form.get('currentIndex'))
 
@@ -184,10 +187,15 @@ def save_pattern():
     session['currentIndex'] = currentIndex
     session.modified = True
 
-    crud.create_project(session['user_id'], session['pattern_id'], session['project_name'], session['swatch_width'], 
-                    session['swatch_height'], session['project_width'], 
-                    session['project_height'], session['currentRow'],  
-                    session['currentIndex'])
+    crud.create_project(session['user_id'], 
+                        session['pattern_id'], 
+                        session['project_name'], 
+                        session['swatch_width'], 
+                        session['swatch_height'], 
+                        session['project_width'], 
+                        session['project_height'], 
+                        session['currentRow'],  
+                        session['currentIndex'])
 
     return jsonify({'message': 'Project record saved!'})
 
@@ -197,20 +205,22 @@ def profile_page():
 
     if session['logged_in'] == True:
         return render_template('profile.html')
-    else:
-        flash('You must be logged in to see profile.')
-        return redirect('/login')
+    
+    flash('You must be logged in to see profile.')
+    return redirect('/login')
 
 @app.route('/api/projects', methods=['POST'])
 def list_projects():
     """Retrieve and return project records associated with user."""
+
     all_user_projects = ProjectRecord.query.filter(ProjectRecord.user_id == session['user_id']).all()
-    response = get_project_object(all_user_projects)
-    return jsonify(response)
+    
+    return jsonify(get_project_object(all_user_projects))
 
 @app.route('/delete/<project_id>', methods=['POST', 'GET'])
 def ask_if_delete_project(project_id):
     """Show delete page for a selected project record."""
+
     if session['logged_in'] == False:
         flash('Please login or create account.')
         return render_template('login.html')
@@ -269,7 +279,6 @@ def continue_knitting(project_id):
     session['row_total'] = row_total
     session['stitchInstructions'] = stitchInstructions
     session.modified = True
-    print(session)
 
     return render_template('projectcontinue.html', project=project)
 
@@ -332,7 +341,6 @@ def custom_stitch_page_save():
         
         for index in range(len(stitchInstructionsList)):
             crud.create_instruction(new_pattern.pattern_id, (index + 1), stitchInstructionsList[index])
-        #prosper
         
         flash('New stitch pattern saved!')
     return redirect('/customstitch')
