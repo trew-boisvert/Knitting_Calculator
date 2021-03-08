@@ -341,11 +341,3 @@ def custom_stitch_page_save():
 if __name__ == '__main__':
     connect_to_db(app)
     app.run(host='0.0.0.0', debug=True)
-
-
-    # user = crud.find_user_by_email(email)
-    # if user:
-    #     flash('There is already an account with that email address.')
-    # else:
-    #     crud.create_user(username, email, password)
-    #     flash('Your account has been created!  Please log in.')
