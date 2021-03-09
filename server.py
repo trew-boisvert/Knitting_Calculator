@@ -308,12 +308,6 @@ def savecontinue():
 
     return jsonify({'message': 'Project record saved!'})    
 
-@app.route('/photos')
-def photos_page():
-    """View photos page."""
-
-    return render_template('photos.html')
-
 @app.route('/customstitch')
 def custom_stitch_page():
     """View custom stitch page."""
@@ -347,6 +341,14 @@ def custom_stitch_page_save():
         flash('New stitch pattern saved!')
     return redirect('/customstitch')
 
+@app.route('/photos', methods=['POST', 'GET'])
+def photos_page():
+    """View photos page."""
+
+    # posts = crud.get_posts()
+    # print(posts)
+
+    return render_template('photos.html', posts='posts')
 
 if __name__ == '__main__':
     connect_to_db(app)

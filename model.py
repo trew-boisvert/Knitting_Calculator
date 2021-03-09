@@ -76,7 +76,7 @@ class Instruction(db.Model):
 
     pattern = db.relationship('Pattern')
 
-    def __repr(self):
+    def __repr__(self):
         return f"<Pattern id= {self.pattern_id} Instructions>"
 
 class Post(db.Model):
@@ -92,6 +92,9 @@ class Post(db.Model):
     post_photo_link = db.Column(db.String(), nullable=False)
 
     user = db.relationship('User')
+
+    def __repr__(self):
+        return f"<Post id= {self.post_id}>"
 
 def connect_to_db(app):
     """Connect the database to our Flask app."""

@@ -174,3 +174,30 @@ $("#new-stitch-row").on('click', (evt) => {
     $('#stitch-instructions-array').append('<input type="text" name="stitch-instructions-list">');
 });
 
+const cloud_url = "https://api.cloudinary.com/v1_1/knittr/image/upload"
+
+$("#upload-photos").on('submit', (evt) => {
+    evt.preventDefault();
+
+    const files = document.querySelector("[type=file]").files;
+    const formData = new FormData();
+
+    for (let i = 0; i < files.length; i++) {
+        let file = files[i];
+        formData.append("file", file);
+        formData.append("upload_preset", "r8rsqkah");
+
+
+        fetch(cloud_url, {
+            method: "POST",
+            body: formData
+        })
+        .then((response) => {
+            return response.text();
+        })
+        .then((data) => {
+            console.log(data["url"])
+            document.getElementById("data").innerHTML += data;
+        });
+    }
+});
