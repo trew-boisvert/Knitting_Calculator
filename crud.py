@@ -1,4 +1,4 @@
-from model import db, User, ProjectRecord, Pattern, Instruction, connect_to_db
+from model import db, User, ProjectRecord, Pattern, Instruction, Post, connect_to_db
 from werkzeug.security import generate_password_hash, check_password_hash
 
 def create_user(user_name, user_email, user_password):
@@ -51,7 +51,7 @@ def create_pattern(pattern_name, pattern_description,
 
 def create_instruction(pattern_id, instruction_row, instruction_text):
     """Create and return a new stitch instruction row.
-        Each pattern will need multiple rows."""
+        Each pattern will need multiple instruction rows."""
 
     instruction = Instruction(
                     pattern_id=pattern_id,
@@ -62,6 +62,21 @@ def create_instruction(pattern_id, instruction_row, instruction_text):
     db.session.commit()
 
     return instruction
+
+def create_post(user_id, post_date, post_title, post_comment, post_photo_link):
+    """Create and return a new post."""
+
+    post = Post(
+        user_id=user_id,
+        post_date=post_date,
+        post_title=post_title,
+        post_comment=post_comment,
+        post_photo_link=post_photo_link)
+
+    db.session.add(post)
+    db.session.commit()
+
+    return post
 
 def save_progress(projectID, current_row, current_index):
     """Save changes in current row and current index to project record in database."""
@@ -116,6 +131,11 @@ def get_projects():
     """Return all projects."""
 
     return ProjectRecord.query.all()
+
+def get_posts():
+    """Return all posts."""
+
+    return Post.query.all()
 
 def get_project_by_id(id):
     """Find a project record by project_id."""

@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, render_template, request, flash, session, redirect, url_for
 from model import connect_to_db, User, ProjectRecord, Pattern, Instruction, Post
 import crud
+from datetime import datetime
 from jinja2 import StrictUndefined
 import cloudinary as Cloud
 import cloudinary.uploader
@@ -341,7 +342,7 @@ def custom_stitch_page_save():
         flash('New stitch pattern saved!')
     return redirect('/customstitch')
 
-@app.route('/photos', methods=['POST', 'GET'])
+@app.route('/photos')
 def photos_page():
     """View photos page."""
 
@@ -349,6 +350,22 @@ def photos_page():
     # print(posts)
 
     return render_template('photos.html', posts='posts')
+
+@app.route('/api/photos', methods=["POST"])
+def upload_photo_post():
+    """Upload a photo post."""
+    # import pdb; pdb.set_trace()
+    # request.form.get - getting from request, not from html
+    post_title = request.form.get('post_title')
+    post_comment = request.form.get('post_comment')
+    img_url = request.form.get('img_url')
+
+    now = datetime.now()
+    now_string = now.strftime("%d/%m/%Y %H:%M:%S")
+
+    post = crud.create_post(session['user_id'], now_string, post_title, post_comment, img_url)
+
+    return jsonify({'status': 'ok'})
 
 if __name__ == '__main__':
     connect_to_db(app)

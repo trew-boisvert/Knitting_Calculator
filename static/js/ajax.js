@@ -1,3 +1,5 @@
+"use strict";
+
 $("#start-project").on('submit', (evt) => {
     evt.preventDefault();
     
@@ -174,30 +176,42 @@ $("#new-stitch-row").on('click', (evt) => {
     $('#stitch-instructions-array').append('<input type="text" name="stitch-instructions-list">');
 });
 
-const cloud_url = "https://api.cloudinary.com/v1_1/knittr/image/upload"
+async function imageUpload(files) {
+    const url = "https://api.cloudinary.com/v1_1/knittr/image/upload";
+    const uploadData = new FormData(); 
 
-$("#upload-photos").on('submit', (evt) => {
+    let file = files[0];
+    uploadData.append("file", file);
+    uploadData.append("upload_preset", "r8rsqkah");
+
+    let response = await fetch(url, {
+        method: "POST",
+        body: uploadData
+    });
+
+    let json = await response.json();
+
+    return json.url
+}
+
+$('#upload-photos').on('submit', (evt) => {
     evt.preventDefault();
 
-    const files = document.querySelector("[type=file]").files;
-    const formData = new FormData();
+    const media_files = $('#photo_upload').prop('files');
+    const cloud_url = imageUpload(media_files);
 
-    for (let i = 0; i < files.length; i++) {
-        let file = files[i];
-        formData.append("file", file);
-        formData.append("upload_preset", "r8rsqkah");
-
-
-        fetch(cloud_url, {
-            method: "POST",
-            body: formData
-        })
-        .then((response) => {
-            return response.text();
-        })
-        .then((data) => {
-            console.log(data["url"])
-            document.getElementById("data").innerHTML += data;
-        });
-    }
+    cloud_url.then((res_url) => {
+        
+        const photo_post_data = {
+            'post_title': $('#post-title').val(),
+            'post_comment': $('#post-comment').val(),
+            'img_url': res_url
+        }
+        console.log(photo_post_data)
+        $.post('/api/photos', photo_post_data, (res) => {
+            if (res.status === 'ok') {
+                $('#photo_upload_success').html(`Your post has been added to the database.`)
+            } 
+        });  
+    });
 });

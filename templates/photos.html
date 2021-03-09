@@ -12,21 +12,21 @@
 {% block body %}
   <p>Share and view photos of knitting projects.</p>
 
-  <form id="upload-photos" method="post" enctype="multipart/form-data">
+  <form id="upload-photos">
     <label for="post-title">Write a headline for your photo post:</label>
-    <input type="text" name="post-title">
+    <input type="text" id="post-title">
 
     <label for="post-comment">Comment on your photo:</label>
-    <input type="text" name="post-comment">
+    <input type="text" id="post-comment">
 
     <label for="files">Please select photos to upload:</label>
-    <input type="file" name="files[]" multiple>
+    <input type="file" id="photo_upload">
     <input type="submit" value="Upload Photos" name="submit">
   </form>
 
   <p id="data"></p>
 
-
+<dd id="photo_upload_success"></dd>
 
 {% endblock %}
 
