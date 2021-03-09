@@ -173,3 +173,4 @@ $("#new-stitch-row").on('click', (evt) => {
     evt.preventDefault();
     $('#stitch-instructions-array').append('<input type="text" name="stitch-instructions-list">');
 });
+
