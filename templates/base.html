@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %}</title>
+    <title>Knittr | {% block title %}{% endblock %}</title>
     <link rel="shortcut icon" type="image/jpg" href="/static/images/yarn_icon.png"/>
     <link rel="stylesheet"
           href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.css"/>
@@ -11,7 +11,10 @@
     <script
       src="https://code.jquery.com/jquery-3.4.1.js"
       integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-      crossorigin="anonymous"></script>
+      crossorigin="anonymous">
+    </script>
+      <link rel="preconnect" href="https://fonts.gstatic.com">
+      <link href="https://fonts.googleapis.com/css2?family=Elsie+Swash+Caps&family=Roboto&display=swap" rel="stylesheet">
     {% block head %}{% endblock %}
 </head>
 <body>
@@ -26,20 +29,21 @@
     </p>
 
   {% endfor %}
-
+<div class="container">
   {% block bodytitle %}{% endblock %}
   
   <div class="hero-head">
     <nav class="navbar">
-      <div class="container">
+      <div>
         <div id="navbarMenuHeroA" class="navbar-menu">
           <div class="navbar-end">
-            <a href="http://0.0.0.0:5000/" class="navbar-item">Welcome Page</a>
-            <a href="http://0.0.0.0:5000/login" class="navbar-item">Log-in/Sign up Page</a>
-            <a href="http://0.0.0.0:5000/calculator" class="navbar-item">Calculator Page</a>
-            <a href="http://0.0.0.0:5000/customstitch" class="navbar-item">CustomStitch Page</a>
-            <a href="http://0.0.0.0:5000/profile" class="navbar-item">Profile Page</a>
-            <a href="http://0.0.0.0:5000/logout" class="navbar-item">Logout Page</a>
+            <a href="http://0.0.0.0:5000/" class="navbar-item">Welcome</a>
+            <a href="http://0.0.0.0:5000/login" class="navbar-item">Log-in/Sign up</a>
+            <a href="http://0.0.0.0:5000/calculator" class="navbar-item">Calculator</a>
+            <a href="http://0.0.0.0:5000/customstitch" class="navbar-item">Custom Stitch</a>
+            <a href="http://0.0.0.0:5000/photos" class="navbar-item">Photos</a>
+            <a href="http://0.0.0.0:5000/profile" class="navbar-item">Profile</a>
+            <a href="http://0.0.0.0:5000/logout" class="navbar-item">Logout</a>
           </div>
         </div>
       </div>
@@ -47,7 +51,7 @@
   </div>
 
   {% block body %}{% endblock %}
-
+</div>
   {% block after_body %}{% endblock %}
 <!-- <div id="footer" class="footer-img">
   <img src="/static/images/BottomBorderKnit.jpg" width="100%" height = "150">

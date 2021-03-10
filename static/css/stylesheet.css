@@ -5,18 +5,21 @@
     position: sticky;
 }
 
-.footer-img {
-    position: absolute;
+/* .footer-img {
+    position: sticky;
     bottom: 0;
     left: 0;
-}
+} */
 
 .container {
-    /* background: url(BackgroundKnit.jpg) no-repeat center center; */
     background-color: #C1DCED;
     background-size: cover;  
 }
 
 body {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1, h2 {
+    font-family: 'Elsie Swash Caps', cursive;
 }
