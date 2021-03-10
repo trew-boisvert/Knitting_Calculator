@@ -20,6 +20,11 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-h1, h2 {
+h1 {
+    font-family: 'Elsie Swash Caps', cursive;
+    font-weight: bold;
+}
+
+h2 {
     font-family: 'Elsie Swash Caps', cursive;
 }
