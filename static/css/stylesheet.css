@@ -11,6 +11,26 @@
     left: 0;
 } */
 
+#bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+#page-wrap {
+    position: relative;
+    z-index: 2;
+    width: 900px;
+    margin: 50px auto;
+    padding: 40px;
+    background: #C1DCED;
+    border: 3px solid #3D0942;
+    border-radius: 7px;
+
+}
+
 .container {
     background-color: #C1DCED;
     background-size: cover;  
@@ -18,13 +38,16 @@
 
 body {
     font-family: 'Roboto', sans-serif;
+    color: #3D0942;
 }
 
 h1 {
     font-family: 'Elsie Swash Caps', cursive;
     font-weight: bold;
+    color: #3D0942;
 }
 
 h2 {
     font-family: 'Elsie Swash Caps', cursive;
+    color: #3D0942;
 }

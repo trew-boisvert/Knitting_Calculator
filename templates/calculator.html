@@ -1,65 +1,92 @@
 {% extends 'base.html' %}
 
+
 {% block title %}Knitting Calculator{% endblock %}
+
 
 {% block head %}{% endblock %}
 
+
 {% block bodytitle %}
+
+<div class="row">
   <h1>Knitting Calculator</h1> 
-  <dd id="calctitle"></dd><h2>Generates Knitting Patterns Based on Your Stitch Size</h2></dd>
+</div>
+
+<div class="row">
+  <dd id="calctitle"></dd><h2>Generate Knitting Patterns Based on Your Stitch Size</h2></dd>
+</div>
+
 {% endblock %}
 
+
 {% block body %}
+<div class="row">
   <dd id="calcbody">This calculator will adjust the number of rows and stitches in a pattern.</dd>
+</div>
 
   <form id="start-project" method="POST">
-    <label for="pattern-id">Select a Stitch Pattern:</label>
-    <select id="pattern-id" name="pattern_id">
-      {% for pattern in patterns %}
-        <option value="{{ pattern.pattern_id }}">{{ pattern.pattern_name }}  {{ pattern.pattern_repeat_width }}x{{ pattern.pattern_repeat_height }}</option>
-      {% endfor %}
-    </select>
+    <div class="row">
+      <label for="pattern-id">Select a Stitch Pattern:</label>
+      <select id="pattern-id" name="pattern_id">
+        {% for pattern in patterns %}
+          <option value="{{ pattern.pattern_id }}">{{ pattern.pattern_name }}  {{ pattern.pattern_repeat_width }}x{{ pattern.pattern_repeat_height }}</option>
+        {% endfor %}
+      </select>
+    </div>
 
-    <label for="swatch-width">How wide is your swatch, in centimeters?</label>
-    <input type="number" step=0.01 id="swatch-width" name="swatch-width" min="0" max="50">
+    <div class="row">
+      <label for="swatch-width">How wide is your swatch?</label>
+      <input type="number" step=0.01 id="swatch-width" name="swatch-width" min="0" max="50">
+    </div>
 
-    <label for="swatch-height">How tall is your swatch, in centimeters?</label>
-    <input type="number" id="swatch-height" name="swatch-height" min="0" max="50">
+    <div class="row">
+      <label for="swatch-height">How tall is your swatch?</label>
+      <input type="number" id="swatch-height" name="swatch-height" min="0" max="50">
+    </div>
 
-    <label for="project-width">How wide do you want your project to be, in centimeters?</label>
-    <input type="number" id="project-width" name="project-width" min="0" max="500">
+    <div class="row">
+      <label for="project-width">How wide do you want your project to be?</label>
+      <input type="number" id="project-width" name="project-width" min="0" max="500">
+    </div>
 
-    <label for="project-height">How tall do you want your project to be, in centimeters?</label>
-    <input type="number" id="project-height" name="project-height" min="0" max="500">
+    <div class="row">
+      <label for="project-height">How tall do you want your project to be?</label>
+      <input type="number" id="project-height" name="project-height" min="0" max="500">
+    </div>
 
-    <label for="project-name">What would you like to name your project?</label>
-    <input type="text" id="project-name" name="project-name">
+    <div class="row">
+      <label for="project-name">What would you like to name your project?</label>
+      <input type="text" id="project-name" name="project-name">
+    </div>
 
-    <input type="submit">
+    <div class="row">
+      <input type="submit">
+    </div>
   </form>
 
   <section id="display-pattern">
     <dl>
+      <div class="row">
+        </dd>
+        <dt>Stitch Name</dt>
+        <dd id="stitchname"></dd>
 
-      </dd>
-      <dt>Stitch Name</dt>
-      <dd id="stitchname"></dd>
+        <dt>Description</dt>
+        <dd id="description"></dd>
 
-      <dt>Description</dt>
-      <dd id="description"></dd>
+        <dt>Stitches to Cast On</dt>
+        <dd id="caston"></dd>
 
-      <dt>Stitches to Cast On</dt>
-      <dd id="caston"></dd>
+        <dt>Rows to Knit</dt>
+        <dd id="totalrows"></dd>
 
-      <dt>Rows to Knit</dt>
-      <dd id="totalrows"></dd>
+        <dt>Knitting Pattern</dt>
+        <dd id="knitpat"></dd>
+        <dd id="start-knitting"></dd>
 
-      <dt>Knitting Pattern</dt>
-      <dd id="knitpat"></dd>
-      <dd id="start-knitting"></dd>
-
-      <dd id="save-status"></dd>
-      
+        <dd id="save-status"></dd>
+      </div>  
     </dl>
   </section>
 {% endblock %}
