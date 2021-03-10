@@ -28,6 +28,14 @@
 
 <dd id="photo_upload_success"></dd>
 
+{% for post in posts %}
+<div>
+  <h2>{{ post.post_title }}</h3>
+  <h3>{{ post.post_comment }}</h3>
+  <img src="{{ post.post_photo_link }}" alt="Photo of knitting">
+</div>
+{% endfor %}
+
 {% endblock %}
 
 {% block after_body %}{% endblock %}

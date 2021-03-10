@@ -245,6 +245,7 @@ def delete_user_account():
     """Delete user account and related project records from database."""
 
     crud.delete_all_projects_for_single_user(session['user_id'])
+    crud.delete_all_posts_for_single_user(session['user_id'])
     crud.delete_user(session['user_id'])
     session['logged_in'] = False
     session.modified = True
@@ -346,10 +347,14 @@ def custom_stitch_page_save():
 def photos_page():
     """View photos page."""
 
-    # posts = crud.get_posts()
-    # print(posts)
+    if session['logged_in'] == False:
+        flash('Please login or create account.')
+        return render_template('login.html')
 
-    return render_template('photos.html', posts='posts')
+    posts = crud.get_posts()
+    print(posts)
+
+    return render_template('photos.html', posts=posts)
 
 @app.route('/api/photos', methods=["POST"])
 def upload_photo_post():

@@ -116,8 +116,20 @@ def delete_all_projects_for_single_user(userID):
     projects = ProjectRecord.query.filter(ProjectRecord.user_id == userID).all()
 
     for project in projects:
-            db.session.delete(project)
+        db.session.delete(project)
             
+    db.session.commit()
+
+    return
+
+def delete_all_posts_for_single_user(userID):
+    """Delete all of the posts of a single user."""
+
+    posts = Post.query.filter(Post.user_id == userID).all()
+
+    for post in posts:
+        db.session.delete(post)
+        
     db.session.commit()
 
     return
