@@ -5,20 +5,47 @@
 {% block head %}{% endblock %}
 
 {% block bodytitle %}
+
+  <div class="row">
     <h1>Project Continue Calculator</h1> 
+  </div>
+
+  <div class="row">
     <h2>Keep knitting!</h2>
+  </div>
+
 {% endblock %}
 
 {% block body %}
-  <p>This should display current spot in project, and have next and prev buttons.</p>
 
-  <div id="name-c" value="{{project.project_name}}">{{project.project_name}}</div>
-  <div id="projectwidth-c" value="{{project.project_width}}">Finished width: {{ project.project_width }}</div>
-  <div id="projectheight-c" value="{{project.project_height}}">Finished height: {{ project.project_height }}</div>
+  <div class="row">
+    <p>This should display current spot in project, and have next and prev buttons.</p>
+  </div>
+
+  <div class="row">
+    <div id="name-c">{{project.project_name}}</div>
+  </div>
+
+  <div class="row">
+    <div id="projectwidth-c">Finished width: {{ project.project_width }}</div>
+  </div>
+
+  <div class="row">
+    <div id="projectheight-c">Finished height: {{ project.project_height }}</div>
+  </div>
   
-  <button id="resume-knitting">Knit!</button>
-  <dd id="keep-knitting"></dd>
-  <dd id="keep-knitting-stitch"></dd>
+  <div class="row">
+    <button id="resume-knitting">Knit!</button>
+  </div>
+
+  <div class="row">
+    <dd id="keep-knitting"></dd>
+  </div>
+
+  <div class="row">
+    <dd id="keep-knitting-stitch"></dd>
+  </div>
+
 {% endblock %}
 
 {% block after_body %}{% endblock %}
