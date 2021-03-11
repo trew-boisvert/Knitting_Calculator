@@ -10,29 +10,47 @@
 {% endblock %}
 
 {% block body %}
-  <p>Write your own.</p>
+  <div class="row">
+    <p>Write your own.</p>
+  </div>
 
+  
   <form action='/api/customstitch' method="POST" id="custom-stitch-save">
+
+    <div class="row">
       <label for="stitch-name">What is the name of your stitch pattern?</label>
       <input type="text" name="stitch-name">
+    </div>
 
+    <div class="row">
       <label for="stitch-description">Please describe your pattern briefly.</label>
       <input type="text" name="stitch-description">
+    </div>
 
+    <div class="row">
       <label for="stitch-repeat-width">How many stitches wide is one repeat of your pattern?</label>
       <input type="number" name="stitch-repeat-width" min="0" max="50">
+    </div>
 
+    <div class="row">
       <label for="stitch-repeat-height">How many rows tall is one repeat of your pattern?</label>
       <input type="number" name="stitch-repeat-height" min="0" max="50">
+    </div>
 
+    <div class="row">
       <dl>
         <label for="new-stitch-row">Please type one row of instruction per text box.</label>
         <button type="button" id="new-stitch-row">Add another row</button>
-        <input type="text" name="stitch-instructions-list">
+        <div>
+          <input type="text" name="stitch-instructions-list">
+        </div>
         <dd id="stitch-instructions-array"></dd>  
       </dl>
+    </div>
 
+    <div class="row">
       <input type="submit">
+    </div>
   </form>
 {% endblock %}
 
