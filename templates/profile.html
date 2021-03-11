@@ -5,18 +5,36 @@
 {% block head %}{% endblock %}
 
 {% block bodytitle %}
+  <div class="row">
     <h1>User Profile</h1> 
+  </div>
+
+  <div class="row">
     <h2>This is your profile!</h2>
+  </div>
 {% endblock %}
 
 {% block body %}
-  <p>Welcome!</p>
-  <p>This is where your saved projects will live.</p>
+  <div class="row">
+    <p>Welcome!</p>
+  </div>
+
+  <div class="row">
+    <p>This is where your saved projects will live.</p>
+  </div>
 
   <section id="display-projects">
-    <dt>Current Projects:</dt>
-    <button type="button" id='display-project-list'>Display Projects</button>
+
+    <div class="row">
+      <dt>Current Projects:</dt>
+    </div>
+
+    <div class="row">
+      <button type="button" id='display-project-list'>Display Projects</button>
+    </div>
+    
     <dd id="current-projects"></dd>
+
   </section>
 
 {% endblock %}
