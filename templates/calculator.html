@@ -22,7 +22,8 @@
 
 {% block body %}
 <div class="row">
-  <dd id="calcbody">This calculator will adjust the number of rows and stitches in a pattern.</dd>
+  <dd>Instructions:</dd>
+  
 </div>
 
   <form id="start-project" method="POST">
@@ -57,11 +58,13 @@
 
     <div class="row">
       <label for="project-name">What would you like to name your project?</label>
-      <input type="text" id="project-name" name="project-name">
+      <div>
+        <input type="text" id="project-name" name="project-name">
+      </div>
     </div>
 
     <div class="row">
-      <input type="submit">
+      <input type="submit" value="Generate Pattern">
     </div>
   </form>
 

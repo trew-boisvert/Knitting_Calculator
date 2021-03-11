@@ -28,12 +28,26 @@
     background: #C1DCED;
     border: 3px solid #3D0942;
     border-radius: 7px;
-
+    box-shadow: 1px 1px 1px #2935A3;
 }
 
 .container {
     background-color: #C1DCED;
     background-size: cover;  
+}
+
+#navbarMenuHeroA {
+    border-bottom: 3px solid #A91678!important;
+    border-bottom-width: 1px !important;
+    border-bottom-style: solid !important;
+}
+
+input {
+    margin: 8px 0;
+}
+
+input[type=text] {
+    width: 40%;
 }
 
 body {
@@ -50,4 +64,8 @@ h1 {
 h2 {
     font-family: 'Elsie Swash Caps', cursive;
     color: #3D0942;
+}
+
+a {
+    color: #2935A3;
 }
