@@ -5,38 +5,63 @@
 {% block head %}{% endblock %}
 
 {% block bodytitle %}
+  <div class="row">
     <h1>Login Page</h1> 
+  </div>
+
+  <div class="row">
     <h2>Create an Account or Login</h2>
+  </div>
 {% endblock %}
 
 {% block body %}
-  <p>This page lets you login to or create a user account.</p>
+  <div class="row">
+    <p>Log into or create a user account.</p>
+  </div>
   
   <form action="/new-account" method="POST">
-    <h2>Create a new account:</h2>
+    <div class="row">
+      <h2>Create a new account:</h2>
+    </div>
     
-    <label>Username:</label>
-    <input type="text" name="newusername" placeholder="Name">
+    <div class="row">
+      <label>Username:</label>
+      <input type="text" name="newusername" placeholder="Name">
+    </div>
 
-    <label>Password:</label>
-    <input type="password" name="newpassword" placeholder="Password">
+    <div class="row">
+      <label>Password:</label>
+      <input type="password" name="newpassword" placeholder="Password">
+    </div>
 
-    <label>Email:</label>
-    <input type="email" name="newemail" placeholder="Email">
+    <div class="row">
+      <label>Email:</label>
+      <input type="email" name="newemail" placeholder="Email">
+    </div>
 
-    <button class="button is-block is-info is-large is-fullwidth">Sign Up</button>
+    <div class="row">
+      <button class="button is-block is-info is-large is-fullwidth">Sign Up</button>
+    </div>
   </form>
 
   <form action="/handle-login" method="POST">
-    <h2>Or login to your existing account here:</h2>
+    <div class="row">
+      <h2>Or login to your existing account here:</h2>
+    </div>
 
-    <label>Email:</label>
-    <input type="email" name="email" placeholder="Email">
+    <div class="row">
+      <label>Email:</label>
+      <input type="email" name="email" placeholder="Email">
+    </div>
 
-    <label>Password:</label>
-    <input type="password" name="password" placeholder="Password">
+    <div class="row">
+      <label>Password:</label>
+      <input type="password" name="password" placeholder="Password">
+    </div>
 
-    <button class="button is-block is-info is-large is-fullwidth">Log In</button>
+    <div class="row">
+      <button class="button is-block is-info is-large is-fullwidth">Log In</button>
+    </div>
   </form>
   
 {% endblock %}
