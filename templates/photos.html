@@ -5,35 +5,63 @@
 {% block head %}{% endblock %}
 
 {% block bodytitle %}
+  <div class="row">
     <h1>Project Photos</h1> 
+  </div>
+
+  <div class="row">
     <h2>See photos of user projects</h2>
+  </div>
 {% endblock %}
 
 {% block body %}
-  <p>Share and view photos of knitting projects.</p>
+  <div class="row">
+    <p>Share and view photos of knitting projects.</p>
+  </div>
 
   <form id="upload-photos">
-    <label for="post-title">Write a headline for your photo post:</label>
-    <input type="text" id="post-title">
+    <div class="row">
+      <label for="post-title">Write a headline for your photo post:</label>
+      <input type="text" id="post-title">
+    </div>
 
-    <label for="post-comment">Comment on your photo:</label>
-    <input type="text" id="post-comment">
+    <div class="row">
+      <label for="post-comment">Comment on your photo:</label>
+      <input type="text" id="post-comment">
+    </div>
 
-    <label for="files">Please select photos to upload:</label>
-    <input type="file" id="photo_upload">
-    <input type="submit" value="Upload Photos" name="submit">
+    <div class="row">
+      <label for="files">Please select photos to upload:</label>
+      <input type="file" id="photo_upload">
+    </div>
+
+    <div class="row">
+      <input type="submit" value="Upload Photos" name="submit">
+    </div>
   </form>
 
-  <p id="data"></p>
+  <div class="row">
+    <p id="data"></p>
+  </div>
 
-<dd id="photo_upload_success"></dd>
+  <div class="row">
+    <dd id="photo_upload_success"></dd>
+  </div>
 
 {% for post in posts %}
-<div>
-  <h2>{{ post.post_title }}</h3>
-  <h3>{{ post.post_comment }}</h3>
-  <img src="{{ post.post_photo_link }}" alt="Photo of knitting">
-</div>
+  <div>
+    <div class="row">
+      <h3>{{ post.post_title }}</h3>
+    </div>
+
+    <div class="row">
+      <h4>{{ post.post_comment }}</h3>
+    </div>
+
+    <div class="row">
+      <img src="{{ post.post_photo_link }}" alt="Photo of knitting">
+    </div>
+  </div>
 {% endfor %}
 
 {% endblock %}

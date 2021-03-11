@@ -69,3 +69,7 @@ h2 {
 a {
     color: #2935A3;
 }
+
+img {
+    max-width: 100%;
+}
