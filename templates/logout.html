@@ -5,23 +5,45 @@
 {% block head %}{% endblock %}
 
 {% block bodytitle %}
+  <div class="row">
     <h1>Logout</h1> 
-    <h2>Leave!</h2>
+  </div>
+
+    <div class="row">
+      <h2>Leave!</h2>
+    </div>
 {% endblock %}
 
 {% block body %}
-  <p>This page lets you log out.  It should also let you delete your account.</p>
+  <div class="row">
+    <p>This page lets you log out.  It should also let you delete your account.</p>
+  </div>
 
-  <button id="logout">Log Out</button>
-  <dd id="logout-text"></dd>
+  <div class="row">
+    <button id="logout">Log Out</button>
+    <dd id="logout-text"></dd>
+  </div>
 
-  <p>If you click the 'Delete Account' button, it will delete your account permanently.</p>
-  <p>There will be no recovering your account, so please be sure you really want to delete your account.</p>
-  <p>Really.</p>
-  <p>There will be no verification screen or double-checking, it's just gonna be gone.</p>
+  <div class="row">
+    <p>If you click the 'Delete Account' button, it will delete your account permanently.</p>
+  </div>
 
-  <button id="delete-account">Delete Account</button>
-  <dd id="delete-account-text"></dd>
+  <div class="row">
+    <p>There will be no recovering your account, so please be sure you really want to delete your account.</p>
+  </div>
+
+  <div class="row">
+    <p>Really.</p>
+  </div>
+
+  <div class="row">
+    <p>There will be no verification screen or double-checking, it's just gonna be gone.</p>
+  </div>
+
+  <div class="row">
+    <button id="delete-account">Delete Account</button>
+    <dd id="delete-account-text"></dd>
+  </div>
 {% endblock %}
 
 {% block after_body %}{% endblock %}
