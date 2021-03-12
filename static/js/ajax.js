@@ -35,14 +35,15 @@ $("#start-project").on('submit', (evt) => {
         let stitch = sessionStorage.getItem('stitchInstructions').split(".,");
 //maybe change append to prepend?
         if(parseInt(sessionStorage.currentRow) === parseInt(sessionStorage.row_total)){
-            $('#start-knitting').append(`<ul>That's all!  Cast off and you're done!</ul>`);
+            $('#start-instructions').prepend(`<ul>That's all!  Cast off and you're done!</ul>`);
+            $('#advance-row').hide();
         }
         else{
 //TODO bind numbers to variable and use that instead of parseing all the time
             if(parseInt(sessionStorage.indexer) === stitch.length){
                 sessionStorage.setItem('indexer', 0);
             }
-            $('#start-knitting').append(`<ul>Row ${parseInt(sessionStorage.currentRow) + 1}</ul><ul>${stitch[parseInt(sessionStorage.indexer)]}</ul>`)
+            $('#start-instructions').prepend(`<ul>Row ${parseInt(sessionStorage.currentRow) + 1}</ul><ul>${stitch[parseInt(sessionStorage.indexer)]}</ul>`)
             sessionStorage.setItem('currentRow', parseInt(sessionStorage.currentRow) + 1);
             sessionStorage.setItem('indexer', parseInt(sessionStorage.indexer) + 1);
         }

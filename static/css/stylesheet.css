@@ -80,6 +80,7 @@ a {
 
 img {
     max-width: 100%;
+    border: 2px solid #2935A3;
 }
 
 #name-c {
