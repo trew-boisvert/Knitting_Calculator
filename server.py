@@ -19,7 +19,7 @@ cloudinary.config(
   api_secret =  APIsecret
 )
 
-#Routes
+#Welcome####################################################################################################
 
 @app.route('/')
 def welcome_page():
@@ -27,21 +27,13 @@ def welcome_page():
 
     return render_template('welcome.html')
 
+#Login/Signup##########################################################################################
+
 @app.route('/login')
 def login_page():
     """View login page."""
 
     return render_template('login.html')
-
-@app.route('/logout')
-def logout_page():
-    """View logout page."""
-
-    if session['logged_in'] == True:
-        return render_template('logout.html')
-    
-    flash('You are not logged in.')
-    return redirect('/login')
 
 @app.route('/handle-login', methods=['POST'])
 def handle_login():
@@ -63,15 +55,6 @@ def handle_login():
     flash(f'Logged in as {user.user_name}')    
     return redirect('/profile')
 
-@app.route('/handle-logout', methods=['POST'])
-def handle_logout():
-    """Log the user out of the application."""
-
-    session['logged_in'] = False
-    session.modified = True
-
-    return jsonify({'message': 'Successfully logged out!'})    
-
 @app.route('/new-account', methods=['POST'])
 def create_new_user():
     """Create/register a new user."""
@@ -87,7 +70,9 @@ def create_new_user():
         crud.create_user(username, email, password)
         flash('Your account has been created!  Please log in.')
 
-    return redirect('/login')
+    return redirect('/login') 
+
+#Calculator############################################################################################
 
 @app.route('/calculator')
 def calculator_page():
@@ -169,58 +154,6 @@ def save_pattern():
 
     return jsonify({'message': 'Project record saved!'})
 
-@app.route('/profile')
-def profile_page():
-    """View profile page."""
-
-    if session['logged_in'] == True:
-        return render_template('profile.html')
-    
-    flash('You must be logged in to see profile.')
-    return redirect('/login')
-
-@app.route('/api/projects', methods=['POST'])
-def list_projects():
-    """Retrieve and return project records associated with user."""
-
-    all_user_projects = ProjectRecord.query.filter(ProjectRecord.user_id == session['user_id']).all()
-    
-    return jsonify(functions.get_project_object(all_user_projects))
-
-@app.route('/delete/<project_id>', methods=['POST', 'GET'])
-def ask_if_delete_project(project_id):
-    """Show delete page for a selected project record."""
-
-    if session['logged_in'] == False:
-        flash('Please login or create account.')
-        return render_template('login.html')
-
-    project = crud.get_project_by_id(project_id)
-    session['to_delete'] = project.project_id
-    session.modified = True
-
-    return render_template('delete.html', project=project)
-
-@app.route('/api/delete', methods=['POST'])
-def delete_project():
-    """Delete selected user project from database."""
-
-    crud.delete_user_project(session['to_delete'])
-
-    return jsonify({'message': 'Project record destroyed!'})
-
-@app.route('/api/accountdelete', methods=['POST'])
-def delete_user_account():
-    """Delete user account and related project records from database."""
-
-    crud.delete_all_projects_for_single_user(session['user_id'])
-    crud.delete_all_posts_for_single_user(session['user_id'])
-    crud.delete_user(session['user_id'])
-    session['logged_in'] = False
-    session.modified = True
-
-    return jsonify({'message': 'Account destroyed!'})
-
 @app.route('/projectcontinue/<project_id>', methods=['POST', 'GET'])
 def continue_knitting(project_id):
     """View Continue-Knitting page."""
@@ -277,7 +210,9 @@ def savecontinue():
 
     crud.save_progress(session['project_id'], currentRow, currentIndex)
 
-    return jsonify({'message': 'Project record saved!'})    
+    return jsonify({'message': 'Project record saved!'}) 
+
+#Custom Stitch############################################################################################
 
 @app.route('/customstitch')
 def custom_stitch_page():
@@ -312,6 +247,8 @@ def custom_stitch_page_save():
         flash('New stitch pattern saved!')
     return redirect('/customstitch')
 
+#Photos###################################################################################################
+
 @app.route('/photos')
 def photos_page():
     """View photos page."""
@@ -339,6 +276,83 @@ def upload_photo_post():
     post = crud.create_post(session['user_id'], now_string, post_title, post_comment, img_url)
 
     return jsonify({'status': 'ok'})
+
+#Profile###################################################################################################
+
+@app.route('/profile')
+def profile_page():
+    """View profile page."""
+
+    if session['logged_in'] == True:
+        return render_template('profile.html')
+    
+    flash('You must be logged in to see profile.')
+    return redirect('/login')
+
+@app.route('/api/projects', methods=['POST'])
+def list_projects():
+    """Retrieve and return project records associated with user."""
+
+    all_user_projects = ProjectRecord.query.filter(ProjectRecord.user_id == session['user_id']).all()
+    
+    return jsonify(functions.get_project_object(all_user_projects))
+
+@app.route('/delete/<project_id>', methods=['POST', 'GET'])
+def ask_if_delete_project(project_id):
+    """Show delete page for a selected project record."""
+
+    if session['logged_in'] == False:
+        flash('Please login or create account.')
+        return render_template('login.html')
+
+    project = crud.get_project_by_id(project_id)
+    session['to_delete'] = project.project_id
+    session.modified = True
+
+    return render_template('delete.html', project=project)
+
+@app.route('/api/delete', methods=['POST'])
+def delete_project():
+    """Delete selected user project from database."""
+
+    crud.delete_user_project(session['to_delete'])
+
+    return jsonify({'message': 'Project record destroyed!'})
+
+#Logout###################################################################################################
+
+@app.route('/logout')
+def logout_page():
+    """View logout page."""
+
+    if session['logged_in'] == True:
+        return render_template('logout.html')
+    
+    flash('You are not logged in.')
+    return redirect('/login')
+
+@app.route('/handle-logout', methods=['POST'])
+def handle_logout():
+    """Log the user out of the application."""
+
+    session['logged_in'] = False
+    session.modified = True
+
+    return jsonify({'message': 'Successfully logged out!'}) 
+
+@app.route('/api/accountdelete', methods=['POST'])
+def delete_user_account():
+    """Delete user account and related project records and posts from database."""
+
+    crud.delete_all_projects_for_single_user(session['user_id'])
+    crud.delete_all_posts_for_single_user(session['user_id'])
+    crud.delete_user(session['user_id'])
+    session['logged_in'] = False
+    session.modified = True
+
+    return jsonify({'message': 'Account destroyed!'})
+
+
 
 if __name__ == '__main__':
     connect_to_db(app)
