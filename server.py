@@ -8,6 +8,7 @@ import cloudinary as Cloud
 import cloudinary.uploader
 import cloudinary.api
 from APIconfig import APIsecret
+
 app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
@@ -320,7 +321,6 @@ def photos_page():
         return render_template('login.html')
 
     posts = crud.get_posts()
-    print(posts)
 
     return render_template('photos.html', posts=posts)
 

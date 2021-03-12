@@ -173,7 +173,7 @@ $("#resume-knitting").on('click', (evt) => {
 
 $("#new-stitch-row").on('click', (evt) => {
     evt.preventDefault();
-    $('#stitch-instructions-array').append('<div><input type="text" name="stitch-instructions-list"></div>');
+    $('#stitch-instructions-array').append('<div><input type="text" name="stitch-instructions-list" placeholder="Next Line"></div>');
 });
 
 async function imageUpload(files) {

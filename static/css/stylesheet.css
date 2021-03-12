@@ -50,6 +50,10 @@
     border-bottom-style: solid !important;
 } */
 
+::placeholder { 
+    color: #2935A3;
+  }
+
 input {
     margin: 8px 0;
 }
