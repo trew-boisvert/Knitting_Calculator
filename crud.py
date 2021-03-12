@@ -1,19 +1,28 @@
 from model import db, User, ProjectRecord, Pattern, Instruction, Post, connect_to_db
 from werkzeug.security import generate_password_hash, check_password_hash
 
+#CREATE###############################################################################################################################
+
 def create_user(user_name, user_email, user_password):
     """Create and return a new user."""
 
-    user = User(user_email=user_email, user_password=generate_password_hash(user_password, method='sha256'), user_name=user_name)
+    user = User(user_email=user_email, 
+                user_password=generate_password_hash(user_password, method='sha256'), 
+                user_name=user_name)
 
     db.session.add(user)
     db.session.commit()
 
     return user
 
-def create_project(user_id, pattern_id, project_name, swatch_width, 
-                    swatch_height, project_width, 
-                    project_height, current_row,  
+def create_project(user_id, 
+                    pattern_id, 
+                    project_name, 
+                    swatch_width, 
+                    swatch_height, 
+                    project_width, 
+                    project_height, 
+                    current_row,  
                     current_index):
     """Create and return a new project."""
 
@@ -33,7 +42,8 @@ def create_project(user_id, pattern_id, project_name, swatch_width,
 
     return project
 
-def create_pattern(pattern_name, pattern_description, 
+def create_pattern(pattern_name, 
+                    pattern_description, 
                     pattern_repeat_width, 
                     pattern_repeat_height):
     """Create and return a new stitch pattern."""
@@ -78,6 +88,35 @@ def create_post(user_id, post_date, post_title, post_comment, post_photo_link):
 
     return post
 
+#READ######################################################################################################
+
+def get_patterns():
+    """Return all patterns."""
+
+    return Pattern.query.all()
+
+def get_posts():
+    """Return all posts."""
+
+    return Post.query.all()
+
+def get_project_by_id(id):
+    """Find a project record by project_id."""
+
+    return ProjectRecord.query.filter(ProjectRecord.project_id == id).first()
+
+def get_pattern_by_name(name):
+    """Find a pattern by name."""
+    
+    return Pattern.query.filter(Pattern.pattern_name == name).first()
+
+def find_user_by_email(email):
+    """Find a user by their email address."""
+
+    return User.query.filter(User.user_email == email).first()
+
+#UPDATE####################################################################################################
+
 def save_progress(projectID, current_row, current_index):
     """Save changes in current row and current index to project record in database."""
 
@@ -89,6 +128,8 @@ def save_progress(projectID, current_row, current_index):
     db.session.commit()
 
     return project
+
+#DELETE########################################################################################################
 
 def delete_user_project(projectID):
     """Delete a project record from the database."""
@@ -134,40 +175,7 @@ def delete_all_posts_for_single_user(userID):
 
     return
 
-def get_patterns():
-    """Return all patterns."""
 
-    return Pattern.query.all()
-
-def get_projects():
-    """Return all projects."""
-
-    return ProjectRecord.query.all()
-
-def get_posts():
-    """Return all posts."""
-
-    return Post.query.all()
-
-def get_project_by_id(id):
-    """Find a project record by project_id."""
-
-    return ProjectRecord.query.filter(ProjectRecord.project_id == id).first()
-
-def get_pattern_by_name(name):
-    """Find a pattern by name."""
-    
-    return Pattern.query.filter(Pattern.pattern_name == name).first()
-
-def get_users():
-    """Return all users."""
-
-    return User.query.all()
-
-def find_user_by_email(email):
-    """Find a user by their email address."""
-
-    return User.query.filter(User.user_email == email).first()
 
 
 if __name__ == '__main__':
