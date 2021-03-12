@@ -12,7 +12,7 @@
 } */
 
 .btn-primary {
-    background: #2935A3;
+    background:#A91678;
 }
 
 .btn-danger {
@@ -80,7 +80,6 @@ a {
 
 img {
     max-width: 100%;
-    border: 2px solid #2935A3;
 }
 
 #name-c {
