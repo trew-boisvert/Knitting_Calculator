@@ -6,8 +6,6 @@ from jinja2 import StrictUndefined
 import cloudinary as Cloud
 import cloudinary.uploader
 import cloudinary.api
-from werkzeug.security import generate_password_hash, check_password_hash
-# can do crud.check_password_hash as a refactor, and remove above line
 from APIconfig import APIsecret
 app = Flask(__name__)
 app.secret_key = "dev"
