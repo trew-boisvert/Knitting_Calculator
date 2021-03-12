@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, render_template, request, flash, session, redirect, url_for
 from model import connect_to_db, User, ProjectRecord, Pattern, Instruction, Post
 import crud
+import functions
 from datetime import datetime
 from jinja2 import StrictUndefined
 import cloudinary as Cloud
@@ -16,37 +17,6 @@ cloudinary.config(
   api_key = "163782255322919", 
   api_secret =  APIsecret
 )
-
-# Functions for backend calculations
-
-def calculate_width(swatch_width, project_width, repeat_size):
-    """Calculate number of stitches for knitting project width."""
-    stitches = 0
-    width = 0
-    while width < project_width:
-        stitches += repeat_size
-        width += swatch_width
-    return stitches
-
-def calculate_height(swatch_height, project_height, repeat_size):
-    rows = 0
-    height = 0
-    while height < project_height:
-        rows += repeat_size
-        height += swatch_height
-    return rows
-
-def get_instruction_array(list_of_objects):
-    result = []
-    for line in list_of_objects:
-        result.append(line.instruction_text)
-    return result
-
-def get_project_object(list_of_objects):
-    result = {}
-    for obj in list_of_objects:
-        result[obj.project_id] = obj.project_name
-    return result
 
 #Routes
 
@@ -143,10 +113,10 @@ def instructions():
 
     stitchChoice = Pattern.query.get(pat_ID)
     all_instructions_table = Instruction.query.filter(Instruction.pattern_id == pat_ID).order_by(Instruction.instruction_row).all()
-    stitchInstructions = get_instruction_array(all_instructions_table)
+    stitchInstructions = functions.get_instruction_array(all_instructions_table)
     
-    cast_on = calculate_width(sWidth, pWidth, stitchChoice.pattern_repeat_width)
-    row_total = calculate_height(sHeight, pHeight, stitchChoice.pattern_repeat_height)
+    cast_on = functions.calculate_width(sWidth, pWidth, stitchChoice.pattern_repeat_width)
+    row_total = functions.calculate_height(sHeight, pHeight, stitchChoice.pattern_repeat_height)
 
     session['pattern_id'] = pat_ID
     session['swatch_width'] = sWidth
@@ -214,7 +184,7 @@ def list_projects():
 
     all_user_projects = ProjectRecord.query.filter(ProjectRecord.user_id == session['user_id']).all()
     
-    return jsonify(get_project_object(all_user_projects))
+    return jsonify(functions.get_project_object(all_user_projects))
 
 @app.route('/delete/<project_id>', methods=['POST', 'GET'])
 def ask_if_delete_project(project_id):
@@ -272,9 +242,9 @@ def continue_knitting(project_id):
 
     stitchChoice = Pattern.query.get(project.pattern_id)
     all_instructions_table = Instruction.query.filter(Instruction.pattern_id == project.pattern_id).order_by(Instruction.instruction_row).all()
-    stitchInstructions = get_instruction_array(all_instructions_table)
-    cast_on = calculate_width(project.swatch_width, project.project_width, stitchChoice.pattern_repeat_width)
-    row_total = calculate_height(project.swatch_height, project.project_height, stitchChoice.pattern_repeat_height)
+    stitchInstructions = functions.get_instruction_array(all_instructions_table)
+    cast_on = functions.calculate_width(project.swatch_width, project.project_width, stitchChoice.pattern_repeat_width)
+    row_total = functions.calculate_height(project.swatch_height, project.project_height, stitchChoice.pattern_repeat_height)
     
     session['cast_on'] = cast_on
     session['row_total'] = row_total
