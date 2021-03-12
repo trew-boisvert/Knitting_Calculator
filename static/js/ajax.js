@@ -15,11 +15,11 @@ $("#start-project").on('submit', (evt) => {
     let url = `/api/instructions`;
 
     $.post(url, formData, (res) => {
-        $('#stitchname').html(res['pattern_name']);
-        $('#description').html(res['pattern_description']);
-        $('#caston').html(res['cast_on']);
-        $('#totalrows').html(res['row_total']);
-        $('#knitpat').html(res['start']);
+        $('#stitchname').append(`<dt>Stitch Name</dt><dd>${res['pattern_name']}</dd>`);
+        $('#description').append(`<dt>Description</dt><dd>${res['pattern_description']}</dd>`);
+        $('#caston').append(`<dt>Stitches to Cast On</dt><dd>${res['cast_on']}</dd>`);
+        $('#totalrows').append(`<dt>Rows to Knit</dt><dd>${res['row_total']}</dd>`);
+        $('#knitpat').append(`<dt>Knitting Pattern</dt><dd>${res['start']}</dd>`);
         
         sessionStorage.setItem('row_total', res['row_total']);
         sessionStorage.setItem('stitchInstructions', res['stitch'])

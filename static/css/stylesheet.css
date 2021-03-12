@@ -11,6 +11,14 @@
     left: 0;
 } */
 
+.btn-primary {
+    background: #2935A3;
+}
+
+.btn-danger {
+    background: #A91678;
+}
+
 #bg {
     position: fixed;
     top: 0;
@@ -36,11 +44,11 @@
     background-size: cover;  
 }
 
-#navbarMenuHeroA {
-    border-bottom: 3px solid #A91678!important;
+/* #navbarMenuHeroA {
+    border-bottom: 3px solid  #2935A3!important;
     border-bottom-width: 1px !important;
     border-bottom-style: solid !important;
-}
+} */
 
 input {
     margin: 8px 0;
@@ -72,4 +80,8 @@ a {
 
 img {
     max-width: 100%;
+}
+
+#name-c {
+    font-weight: bold;
 }
