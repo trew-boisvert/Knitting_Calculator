@@ -27,8 +27,8 @@ $("#start-project").on('submit', (evt) => {
         sessionStorage.setItem('indexer', 0)
     })
 
-    $('#start-knitting').append('<button id="advance-row">Next Row</button>');
-    $('#start-knitting').append('<button id="save-pattern">Save Project</button>');
+    $('#start-knitting').append('<button id="advance-row" class="btn btn-default">Next Row</button>');
+    $('#start-knitting').append('<button id="save-pattern" class="btn btn-default">Save Project</button>');
 
     $("#advance-row").on('click', (evt) => {
         
@@ -85,7 +85,7 @@ $("#goodbye-forever").on('click', (evt) => {
     $.post('/api/delete', (res) => {
         $('#goodbye-forever').hide();
         $('#say-goodbye').append(`<p>${res['message']}</p>`);
-        $('#say-goodbye').append(`<a href="http://0.0.0.0:5000/profile">Return to Profile</a>`);
+        $('#say-goodbye').append(`<a href="http://0.0.0.0:5000/profile" class="btn btn-default">Return to Profile</a>`);
     })
 })
 
@@ -114,7 +114,7 @@ $("#resume-knitting").on('click', (evt) => {
 
         $('#keep-knitting').append(`<p>This project is ${sessionStorage.getItem('cast_on')} stitches wide and will have ${sessionStorage.getItem('row_total')} rows.</p>`);
         $('#keep-knitting-stitch').html(`<p>Row ${parseInt(sessionStorage.currentRow) + 1}:</p><ul>${stitch[parseInt(sessionStorage.indexer)]}</ul>`);
-        $('#keep-knitting').append('<button id="previous-row">Previous Row</button><button id="next-row">Next Row</button>');
+        $('#keep-knitting').append('<button id="previous-row" class="btn btn-default">Previous Row</button><button id="next-row" class="btn btn-default">Next Row</button>');
 
         $("#next-row").on('click', (evt) => {
             evt.preventDefault();
