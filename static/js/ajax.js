@@ -75,7 +75,7 @@ $("#display-project-list").on('click', (evt) => {
     $('#display-project-list').hide();
     $.post('/api/projects', (res) => {
         for(const key in res){
-            $('#current-projects').append(`<li><a href="/projectcontinue/${key}">${res[key]}</a><a href="/delete/${key}">Delete Project</a></li>`)
+            $('#current-projects').append(`<div><a href="/projectcontinue/${key}" class="btn btn-default">${res[key]}</a><a href="/delete/${key}" class="btn btn-default"><i class="far fa-trash-alt"></i></a></div>`)
         }
     })
 })
