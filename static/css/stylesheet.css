@@ -15,6 +15,11 @@
     background:#A91678;
 }
 
+.btn-default {
+    border: 1px solid #2935A3;
+    background-color: #C7E07B;
+}
+
 .btn-danger {
     background: #A91678;
 }
