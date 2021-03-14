@@ -24,6 +24,12 @@
     background: #A91678;
 }
 
+.btn:hover
+{
+background-image:none;
+background-color:#ABD039;
+}
+
 #bg {
     position: fixed;
     top: 0;

@@ -21,12 +21,7 @@
     {% block head %}{% endblock %}
 </head>
   <body>
-  <!-- <main>
-    <div class="header-img">
-      <img src="/static/images/TopBorderKnit.jpg" width="100%" height="150">
-    </div>
-  </main> -->
-    <div id="page-wrap">
+    <div id="page-wrap" class="container">
 
       {% for msg in get_flashed_messages() %}
         <p class="flash-msg">
@@ -60,9 +55,7 @@
         {% block body %}{% endblock %}
       
         {% block after_body %}{% endblock %}
-      <!-- <div id="footer" class="footer-img">
-        <img src="/static/images/BottomBorderKnit.jpg" width="100%" height = "150">
-      </div> -->
+        
       <script src="/static/js/ajax.js"></script>
       </div>
     </div>
@@ -73,14 +66,3 @@
 
   </body>
 </html>
-
-<!-- 
-This is font-awesome stuff that might be implemented later when decorating buttons
-<link rel="stylesheet" href="
-//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css
-" id="font-awesome-css" type="text/css" media="screen"> -->
-
-
-<!-- <a href=""><i class="fa fa-trash-alt"></i></a> -->
-
-<!-- <a href=""><i class="fa fa-trash-alt"></i></a> -->
