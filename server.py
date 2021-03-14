@@ -284,7 +284,8 @@ def profile_page():
     """View profile page."""
 
     if session['logged_in'] == True:
-        return render_template('profile.html')
+        user = User.query.filter_by(user_id=session['user_id']).first()
+        return render_template('profile.html', user=user)
     
     flash('You must be logged in to see profile.')
     return redirect('/login')

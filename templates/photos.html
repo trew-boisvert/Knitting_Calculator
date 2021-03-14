@@ -15,9 +15,11 @@
 {% endblock %}
 
 {% block body %}
-  <div class="row">
-    <p>Share and view photos of knitting projects.</p>
-  </div>
+<div class="row">
+  <h2>
+    Upload a Photo
+  </h2>
+</div>
 
   <form id="upload-photos">
     <div class="row">
@@ -36,7 +38,7 @@
     </div>
 
     <div class="row">
-      <input type="submit" value="Upload Photos" name="submit" class="btn btn-default">
+      <input type="submit" value="Upload Photo" name="submit" class="btn btn-default">
     </div>
   </form>
 
@@ -48,6 +50,11 @@
     <dd id="photo_upload_success"></dd>
   </div>
 
+  <div class="row">
+    <h2>
+      Photo Gallery
+    </h2>
+  </div>
 {% for post in posts %}
   <div>
     <div class="row">
