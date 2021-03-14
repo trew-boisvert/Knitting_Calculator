@@ -1,7 +1,7 @@
 from model import db, User, ProjectRecord, Pattern, Instruction, Post, connect_to_db
 from werkzeug.security import generate_password_hash, check_password_hash
 
-#CREATE###############################################################################################################################
+#USER#################################################################################
 
 def create_user(user_name, user_email, user_password):
     """Create and return a new user."""
@@ -14,6 +14,23 @@ def create_user(user_name, user_email, user_password):
     db.session.commit()
 
     return user
+
+def find_user_by_email(email):
+    """Find a user by their email address."""
+
+    return User.query.filter(User.user_email == email).first()
+
+def delete_user(userID):
+    """Delete a user from the database."""
+
+    user = User.query.get(userID)
+
+    db.session.delete(user)
+    db.session.commit()
+
+    return
+
+#PROJECTRECORD########################################################################
 
 def create_project(user_id, 
                     pattern_id, 
@@ -42,6 +59,47 @@ def create_project(user_id,
 
     return project
 
+def get_project_by_id(id):
+    """Find a project record by project_id."""
+
+    return ProjectRecord.query.filter(ProjectRecord.project_id == id).first()
+
+def save_progress(projectID, current_row, current_index):
+    """Save changes in current row and current index to project record in database."""
+
+    project = ProjectRecord.query.get(projectID)
+    project.current_row = current_row
+    project.current_index = current_index
+
+    db.session.add(project)
+    db.session.commit()
+
+    return project
+
+def delete_user_project(projectID):
+    """Delete a project record from the database."""
+
+    project = ProjectRecord.query.get(projectID)
+
+    db.session.delete(project)
+    db.session.commit()
+
+    return
+
+def delete_all_projects_for_single_user(userID):
+    """Delete all of the project records of a single user."""
+
+    projects = ProjectRecord.query.filter(ProjectRecord.user_id == userID).all()
+
+    for project in projects:
+        db.session.delete(project)
+            
+    db.session.commit()
+
+    return
+
+#PATTERN##############################################################################
+
 def create_pattern(pattern_name, 
                     pattern_description, 
                     pattern_repeat_width, 
@@ -59,6 +117,18 @@ def create_pattern(pattern_name,
 
     return pattern
 
+def get_patterns():
+    """Return all patterns."""
+
+    return Pattern.query.all()
+
+def get_pattern_by_name(name):
+    """Find a pattern by name."""
+    
+    return Pattern.query.filter(Pattern.pattern_name == name).first()
+
+#INSTRUCTION##########################################################################
+
 def create_instruction(pattern_id, instruction_row, instruction_text):
     """Create and return a new stitch instruction row.
         Each pattern will need multiple instruction rows."""
@@ -72,6 +142,8 @@ def create_instruction(pattern_id, instruction_row, instruction_text):
     db.session.commit()
 
     return instruction
+
+#POST#################################################################################
 
 def create_post(user_id, post_date, post_title, post_comment, post_photo_link):
     """Create and return a new post."""
@@ -88,80 +160,10 @@ def create_post(user_id, post_date, post_title, post_comment, post_photo_link):
 
     return post
 
-#READ######################################################################################################
-
-def get_patterns():
-    """Return all patterns."""
-
-    return Pattern.query.all()
-
 def get_posts():
     """Return all posts."""
 
     return Post.query.all()
-
-def get_project_by_id(id):
-    """Find a project record by project_id."""
-
-    return ProjectRecord.query.filter(ProjectRecord.project_id == id).first()
-
-def get_pattern_by_name(name):
-    """Find a pattern by name."""
-    
-    return Pattern.query.filter(Pattern.pattern_name == name).first()
-
-def find_user_by_email(email):
-    """Find a user by their email address."""
-
-    return User.query.filter(User.user_email == email).first()
-
-#UPDATE####################################################################################################
-
-def save_progress(projectID, current_row, current_index):
-    """Save changes in current row and current index to project record in database."""
-
-    project = ProjectRecord.query.get(projectID)
-    project.current_row = current_row
-    project.current_index = current_index
-
-    db.session.add(project)
-    db.session.commit()
-
-    return project
-
-#DELETE########################################################################################################
-
-def delete_user_project(projectID):
-    """Delete a project record from the database."""
-
-    project = ProjectRecord.query.get(projectID)
-
-    db.session.delete(project)
-    db.session.commit()
-
-    return
-
-def delete_user(userID):
-    """Delete a user from the database."""
-
-    user = User.query.get(userID)
-
-    db.session.delete(user)
-    db.session.commit()
-
-    return
-
-def delete_all_projects_for_single_user(userID):
-    """Delete all of the project records of a single user."""
-
-    projects = ProjectRecord.query.filter(ProjectRecord.user_id == userID).all()
-
-    for project in projects:
-        db.session.delete(project)
-            
-    db.session.commit()
-
-    return
 
 def delete_all_posts_for_single_user(userID):
     """Delete all of the posts of a single user."""
@@ -174,7 +176,6 @@ def delete_all_posts_for_single_user(userID):
     db.session.commit()
 
     return
-
 
 
 
