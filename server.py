@@ -264,8 +264,7 @@ def photos_page():
 @app.route('/api/photos', methods=["POST"])
 def upload_photo_post():
     """Upload a photo post."""
-    # import pdb; pdb.set_trace()
-    # request.form.get - getting from request, not from html
+
     post_title = request.form.get('post_title')
     post_comment = request.form.get('post_comment')
     img_url = request.form.get('img_url')
