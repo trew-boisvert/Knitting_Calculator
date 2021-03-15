@@ -4,19 +4,16 @@
 
 {% block head %}{% endblock %}
 
-{% block bodytitle %}
-  <div class="row">
-    <h1>{{ user.user_name }}</h1> 
-  </div>
-
-  <div class="row">
-    <h2>{{ user.user_name }}'s Homepage</h2>
-  </div>
-{% endblock %}
+{% block bodytitle %}{% endblock %}
 
 {% block body %}
+
   <div class="row">
-    <p>Welcome!</p>
+    <h2>{{ user.user_name }}'s Dashboard</h2>
+  </div>
+
+  <div class="row">
+    <p>Welcome, {{ user.user_name }}!</p>
   </div>
 
   <section id="display-projects">

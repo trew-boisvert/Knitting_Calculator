@@ -7,37 +7,32 @@
 {% block head %}{% endblock %}
 
 
-{% block bodytitle %}
-
-<div class="row">
-  <h1>Knitting Calculator</h1> 
-</div>
-
-<div class="row">
-  <dd id="calctitle"></dd><h2>Generate Knitting Patterns Based on Your Stitch Size</h2></dd>
-</div>
-
-{% endblock %}
+{% block bodytitle %}{% endblock %}
 
 
 {% block body %}
-<div class="row">
-  <p><b>Instructions:</b></p>
 
-  <p>Start by picking a stitch pattern.</p>
+  <div class="row">
+    <dd id="calctitle"></dd><h2>Generate Knitting Patterns Based on Your Stitch Size</h2></dd>
+  </div>
 
-  <p>
-    The numbers following the name tell you how big to make your swatch.
-    For example, if you see 4x5, your swatch needs to be four (4) stitches wide, 
-    and five (5) rows tall. 
-  </p> 
+  <div class="row">
+    <p><b>Instructions:</b></p>
 
-  <p>
-    Once you knit your swatch you can enter the 
-    measurements into the next section.  
-  </p>
-  
-</div>
+    <p>Start by picking a stitch pattern.</p>
+
+    <p>
+      The numbers following the name tell you how big to make your swatch.
+      For example, if you see 4x5, your swatch needs to be four (4) stitches wide, 
+      and five (5) rows tall. 
+    </p> 
+
+    <p>
+      Once you knit your swatch you can enter the 
+      measurements into the next section.  
+    </p>
+    
+  </div>
 
   <form id="start-project" method="POST">
     <div class="row">
@@ -72,7 +67,7 @@
     <div class="row">
       <label for="project-name">What would you like to name your project?</label>
       <div>
-        <input type="text" id="project-name" name="project-name">
+        <input type="text" id="project-name" name="project-name" placeholder="Your new project!">
       </div>
     </div>
 
