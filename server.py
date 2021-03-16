@@ -270,9 +270,8 @@ def upload_photo_post():
     img_url = request.form.get('img_url')
 
     now = datetime.now()
-    now_string = now.strftime("%d/%m/%Y %H:%M:%S")
 
-    post = crud.create_post(session['user_id'], now_string, post_title, post_comment, img_url)
+    post = crud.create_post(session['user_id'], now, post_title, post_comment, img_url)
 
     return jsonify({'status': 'ok'})
 
