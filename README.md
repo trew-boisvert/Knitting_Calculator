@@ -9,7 +9,9 @@
 * [About the Developer](#developer)
 
 ## <a name="summary"></a>Summary
-**Knittr** is a calculator for knitters that performs project calculations for them.  It takes in input about a user's stitch pattern choice, swatch measurements, and desired finished size for a blanket, scarf, or shawl, and then calculates and generates a custom knitting pattern for the user to follow.  
+**Knittr** is a calculator for knitters that performs project calculations for them.  It takes in input about a user's stitch pattern choice, swatch measurements, and desired finished size for a blanket, scarf, or shawl, and then calculates and generates a custom knitting pattern for the user to follow. 
+
+See the <a href="https://www.youtube.com/watch?v=mqXHf9OXQss">Demo Reel.</a>
 
 ## <a name="tech-stack"></a>Tech Stack
 __Front End:__ HTML5, Jinja2, CSS, JavaScript, AJAX, jQuery, Bootstrap<br/>
