@@ -7,10 +7,10 @@ from jinja2 import StrictUndefined
 import cloudinary as Cloud
 import cloudinary.uploader
 import cloudinary.api
-from APIconfig import APIsecret
+from APIconfig import APIsecret, SecretKey
 
 app = Flask(__name__)
-app.secret_key = "dev"
+app.secret_key = SecretKey
 app.jinja_env.undefined = StrictUndefined
 
 cloudinary.config( 
