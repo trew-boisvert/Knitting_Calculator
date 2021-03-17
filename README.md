@@ -19,6 +19,8 @@ __Back End:__ Python, Flask, PostgreSQL, SQLAlchemy <br/>
 
 Create and Log in to an account.
 
+![Login GIF](/static/images/LoginGIF.gif)
+
 Use knitting calculator to generate a custom knitting pattern and save it to your profile.  Iterate through the pattern line by line while your progress is automatically saved.  
 
 Author your own stitch pattern and add it to the database using the Custom Stitch adder.
