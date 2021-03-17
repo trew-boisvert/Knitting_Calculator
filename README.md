@@ -21,13 +21,22 @@ Create and Log in to an account.
 
 ![Login GIF](/static/images/LoginGIF.gif)
 
-Use knitting calculator to generate a custom knitting pattern and save it to your profile.  Iterate through the pattern line by line while your progress is automatically saved.  
+Use knitting calculator to generate a custom knitting pattern and save it to your profile.  Iterate through the pattern line by line while your progress is automatically saved. 
+
+![Calculator GIF](/static/images/CalculatorGIF.gif)
+![Continue Calculator GIF](/static/images/ContinueCalculatorGIF.gif)
 
 Author your own stitch pattern and add it to the database using the Custom Stitch adder.
 
+![Custom Stitch GIF](/static/images/CustomStitchGIF.gif)
+
 Upload photos of your knitting projects to the photo/discussion board.
 
+![Upload GIF](/static/images/UploadGIF.gif)
+
 Log out from or delete your account.  Knittr respects your right to be forgotten!
+
+![Logout GIF](/static/images/LogoutGIF.gif)
 
 ## <a name="setup"></a>Setup/Installation
 
