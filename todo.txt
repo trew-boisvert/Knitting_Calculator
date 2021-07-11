@@ -1,0 +1,20 @@
+- write some decorators to clean up server.py
+- add methods to model.py - to add project to session
+- stitchpattern = self.pattern instead of query
+- do patterns split correctly?  no stray punctuation?
+- clean commented out code
+- write docs
+- rewrite user login/logout/verification - make more secure 
+
+- style flash messages
+- different color for selected tab
+- calculator page - play with tables to display instructions
+- rename functions file
+- maybe darken background?
+- update text to address client
+- make second page for 'delete account'
+- on calculator - 2 separate divs, hide pattern, make one appear
+- hide button menu if not logged in
+- right justify labels input
+- get rid of display button on profile page
+- add 'delete post' option
