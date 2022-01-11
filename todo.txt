@@ -4,7 +4,8 @@
 - do patterns split correctly?  no stray punctuation?
 - clean commented out code
 - write docs
-- rewrite user login/logout/verification - make more secure 
+- rewrite user login/logout/verification - make more secure  
+- create tests
 
 - style flash messages
 - different color for selected tab
